@@ -13,6 +13,8 @@ class MyApp extends StatelessWidget {
       routes: {
         'login': (_) => LoginPage(),
       },
+
+      theme: ThemeData(primaryColor: ),
     );
   }
 }
