@@ -41,6 +41,10 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Widget _lottieAnimation() {
+    return Image.asset("assets/animation/man-delivery.gif");
+  }
+
   Widget _textLogin() {
     return Text("LOGIN",
         style: TextStyle(
