@@ -43,12 +43,12 @@ flutter:
     - assets/img/
     - assets/json/
     - assets/animation/
- 
+
   fonts:
     - family: NimbusSans
       fonts:
-         - asset: assets/fonts/NimbusSans/NimbusSanL-Reg.otf
-         
+        - asset: assets/fonts/NimbusSans/NimbusSanL-Reg.otf
+
     - family: NimbusSans
       fonts:
         - asset: assets/fonts/Roboto/Roboto-Medium.ttf

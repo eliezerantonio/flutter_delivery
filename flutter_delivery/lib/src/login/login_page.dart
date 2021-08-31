@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_delivery/src/login/login_controller.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,6 +10,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  LoginController _controller = new LoginController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.init(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
