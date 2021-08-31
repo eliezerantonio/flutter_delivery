@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_delivery/src/login/login_controller.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
@@ -15,7 +16,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _controller.init(context);
+    SchedulerBinding.instance!.addPersistentFrameCallback((timeStamp) {
+      _controller.init(context);
+    });
   }
 
   @override
@@ -84,11 +87,14 @@ class _LoginPageState extends State<LoginPage> {
         SizedBox(
           width: 7,
         ),
-        Text(
-          'Criar agora',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: MyColors.primaryColor,
+        GestureDetector(
+          onTap: _controller.goToRegisterPage,
+          child: Text(
+            'Criar agora',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: MyColors.primaryColor,
+            ),
           ),
         ),
       ],
