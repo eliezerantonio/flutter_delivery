@@ -12,10 +12,20 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         width: double.infinity,
         child: Stack(
           children: [
+            Column(
+              children: [
+                _lottieAnimation(),
+                _texFieldEmail(),
+                _texFieldPassword(),
+                _buttonLogin(),
+                _textDontHaveAccount()
+              ],
+            ),
             Positioned(
               left: -100,
               top: -80,
@@ -26,15 +36,6 @@ class _LoginPageState extends State<LoginPage> {
               left: 25,
               child: _textLogin(),
             ),
-            Column(
-              children: [
-                _imageBaner(),
-                _texFieldEmail(),
-                _texFieldPassword(),
-                _buttonLogin(),
-                _textDontHaveAccount()
-              ],
-            ),
           ],
         ),
       ),
@@ -42,7 +43,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _lottieAnimation() {
-    return Image.asset("assets/animation/man-delivery.gif");
+    return Container(
+      margin: EdgeInsets.only(
+        top: 130,
+        bottom: MediaQuery.of(context).size.height * 0.07,
+      ),
+      child: Image.asset("assets/animation/man-delivery.gif",
+          width: 350, height: 250, fit: BoxFit.cover),
+    );
   }
 
   Widget _textLogin() {
