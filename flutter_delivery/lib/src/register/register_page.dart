@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_delivery/src/register/register_controller.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -9,6 +11,15 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  RegisterController _controller = RegisterController();
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance!.addPersistentFrameCallback((timeStamp) {
+      _controller.init(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +38,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   _texFieldPassword(),
                   _texFieldConfirmPassword(),
                   _buttonLogin(),
-                  _textDontHaveAccount()
                 ],
               ),
             ),
@@ -73,7 +83,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _textRegister() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        _controller.backToLoginPage();
+      },
       child: Row(
         children: [
           Icon(Icons.arrow_back_ios, color: Colors.white),
@@ -86,33 +98,6 @@ class _RegisterPageState extends State<RegisterPage> {
               )),
         ],
       ),
-    );
-  }
-
-  Row _textDontHaveAccount() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Tem uma conta?',
-          style: TextStyle(
-            color: MyColors.primaryColor,
-          ),
-        ),
-        SizedBox(
-          width: 7,
-        ),
-        GestureDetector(
-          onTap: () {},
-          child: Text(
-            'Criar agora',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: MyColors.primaryColor,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -141,6 +126,8 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: _controller.emailController,
+        keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           hintText: 'E-mail',
           border: InputBorder.none,
@@ -162,6 +149,7 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: _controller.nameController,
         decoration: InputDecoration(
           hintText: 'Nome',
           border: InputBorder.none,
@@ -183,6 +171,7 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: _controller.lastnameController,
         decoration: InputDecoration(
           hintText: 'Apelido',
           border: InputBorder.none,
@@ -204,6 +193,8 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: _controller.phoneController,
+        keyboardType: TextInputType.phone,
         decoration: InputDecoration(
           hintText: 'Telefone',
           border: InputBorder.none,
@@ -225,6 +216,8 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: _controller.passwordController,
+        obscureText: true,
         decoration: InputDecoration(
           hintText: 'Senha',
           border: InputBorder.none,
@@ -246,6 +239,8 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: _controller.confirmPasswordController,
+        obscureText: true,
         decoration: InputDecoration(
           hintText: 'Confrima senha',
           border: InputBorder.none,
@@ -256,20 +251,6 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           contentPadding: EdgeInsets.all(15),
         ),
-      ),
-    );
-  }
-
-  Widget _imageBaner() {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 100,
-        bottom: MediaQuery.of(context).size.height * 0.22,
-      ),
-      child: Image.asset(
-        "assets/img/delivery.png",
-        width: 200,
-        height: 200,
       ),
     );
   }

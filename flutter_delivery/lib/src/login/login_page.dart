@@ -28,14 +28,16 @@ class _LoginPageState extends State<LoginPage> {
         width: double.infinity,
         child: Stack(
           children: [
-            Column(
-              children: [
-                _lottieAnimation(),
-                _texFieldEmail(),
-                _texFieldPassword(),
-                _buttonLogin(),
-                _textDontHaveAccount()
-              ],
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  _lottieAnimation(),
+                  _texFieldEmail(),
+                  _texFieldPassword(),
+                  _buttonLogin(),
+                  _textDontHaveAccount()
+                ],
+              ),
             ),
             Positioned(
               left: -100,
