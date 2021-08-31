@@ -14,17 +14,40 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        child: Column(
+        child: Stack(
           children: [
-            _imageBaner(),
-            _texFieldEmail(),
-            _texFieldPassword(),
-            _buttonLogin(),
-            _textDontHaveAccount()
+            Positioned(
+              left: -100,
+              top: -80,
+              child: _circleLogin(),
+            ),
+            Positioned(
+              top: 60,
+              left: 25,
+              child: _textLogin(),
+            ),
+            Column(
+              children: [
+                _imageBaner(),
+                _texFieldEmail(),
+                _texFieldPassword(),
+                _buttonLogin(),
+                _textDontHaveAccount()
+              ],
+            ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _textLogin() {
+    return Text("LOGIN",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w500,
+          fontSize: 22,
+        ));
   }
 
   Row _textDontHaveAccount() {
@@ -65,6 +88,17 @@ class _LoginPageState extends State<LoginPage> {
           ),
           padding: EdgeInsets.symmetric(vertical: 15),
         ),
+      ),
+    );
+  }
+
+  Widget _circleLogin() {
+    return Container(
+      width: 240,
+      height: 230,
+      decoration: BoxDecoration(
+        color: Colors.red,
+        borderRadius: BorderRadius.circular(100),
       ),
     );
   }
