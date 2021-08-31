@@ -7,14 +7,17 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    
+  return MaterialApp(
       title: 'Delivery',
       debugShowCheckedModeBanner: false,
       initialRoute: 'login',
       routes: {
         'login': (_) => LoginPage(),
       },
-      theme: ThemeData(primaryColor: MyColors.primaryColor),
+      theme: ThemeData(
+        primaryColor: MyColors.primaryColor,
+      ),
     );
   }
 }
