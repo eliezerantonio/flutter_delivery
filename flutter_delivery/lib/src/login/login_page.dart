@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: _controller.login,
         child: Text("Entrar"),
         style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
@@ -137,6 +137,8 @@ class _LoginPageState extends State<LoginPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: _controller.emailController,
+        keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           hintText: 'E-mail',
           border: InputBorder.none,
@@ -158,6 +160,8 @@ class _LoginPageState extends State<LoginPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: _controller.passwordController,
+        obscureText: true,
         decoration: InputDecoration(
           hintText: 'Senha',
           border: InputBorder.none,
