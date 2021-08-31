@@ -34,7 +34,6 @@ class _LoginPageState extends State<LoginPage> {
         Text(
           'Tem uma conta?',
           style: TextStyle(
-            fontWeight: FontWeight.bold,
             color: MyColors.primaryColor,
           ),
         ),
@@ -52,34 +51,77 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  ElevatedButton _buttonLogin() {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text("Entrar"),
+  Widget _buttonLogin() {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
+      child: ElevatedButton(
+        onPressed: () {},
+        child: Text("Entrar"),
+        style: ElevatedButton.styleFrom(
+          primary: MyColors.primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 15),
+        ),
+      ),
     );
   }
 
   Widget _texFieldEmail() {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: 'E-mail',
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
+      decoration: BoxDecoration(
+          color: MyColors.primaryOpacityColor,
+          borderRadius: BorderRadius.circular(30)),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'E-mail',
+          border: InputBorder.none,
+          hintStyle: TextStyle(color: MyColors.primaryColorDark),
+          prefixIcon: Icon(
+            Icons.email,
+            color: MyColors.primaryColor,
+          ),
+          contentPadding: EdgeInsets.all(15),
+        ),
       ),
     );
   }
 
   Widget _texFieldPassword() {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: 'Password',
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
+      decoration: BoxDecoration(
+          color: MyColors.primaryOpacityColor,
+          borderRadius: BorderRadius.circular(30)),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Senha',
+          border: InputBorder.none,
+          hintStyle: TextStyle(color: MyColors.primaryColorDark),
+          prefixIcon: Icon(
+            Icons.lock,
+            color: MyColors.primaryColor,
+          ),
+          contentPadding: EdgeInsets.all(15),
+        ),
       ),
     );
   }
 
   Widget _imageBaner() {
-    return Image.asset(
-      "assets/img/delivery.png",
-      width: 200,
-      height: 200,
+    return Container(
+      margin: EdgeInsets.only(
+        top: 100,
+        bottom: MediaQuery.of(context).size.height * 0.22,
+      ),
+      child: Image.asset(
+        "assets/img/delivery.png",
+        width: 200,
+        height: 200,
+      ),
     );
   }
 }
