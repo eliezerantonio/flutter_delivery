@@ -12,7 +12,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Container(
         width: double.infinity,
         child: Stack(
@@ -59,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.white,
           fontWeight: FontWeight.w500,
           fontSize: 22,
+          fontFamily: 'NimbusSans',
         ));
   }
 
