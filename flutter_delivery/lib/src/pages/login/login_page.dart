@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
           width: 7,
         ),
         GestureDetector(
-          onTap: _controller.goToRegisterPage,
+          onTap: () => _controller.goToRegisterPage(context),
           child: Text(
             'Criar agora',
             style: TextStyle(

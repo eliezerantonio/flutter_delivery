@@ -10,7 +10,7 @@ class LoginController {
     this.context = context;
   }
 
-  void goToRegisterPage() {
+  void goToRegisterPage(BuildContext context) {
     Navigator.pushNamed(context, 'register');
   }
 
