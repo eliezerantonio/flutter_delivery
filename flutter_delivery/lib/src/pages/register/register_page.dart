@@ -35,6 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   _texFieldEmail(),
                   _texFieldName(),
                   _texFieldLastName(),
+                  _texFieldLastPhone(),
                   _texFieldPassword(),
                   _texFieldConfirmPassword(),
                   _buttonLogin(),
