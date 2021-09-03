@@ -37,8 +37,8 @@ class RegisterController {
         name: name,
         lastname: lastname,
         phone: phone);
-
+    print(user.name);
     ResponseApi responseApi = await usersProvider.create(user);
-    print(responseApi.toJson());
+    // print(responseApi.message);
   }
 }

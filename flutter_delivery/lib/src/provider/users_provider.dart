@@ -20,10 +20,12 @@ class UsersProvider {
       Uri url = Uri.http(_url, "$_api/create");
       String bodyParams = json.encode(user);
 
-      Map<String, dynamic> headers = {'Content-Type': 'application/json'};
+     
+
+      Map<String, String> headers = {'Content-Type': 'application/json'};
 
       final response = await http.post(url, headers: headers, body: bodyParams);
-
+ print(response);
       final data = json.decode(response.body);
 
       ResponseApi responseApi = ResponseApi.fromJson(data);
