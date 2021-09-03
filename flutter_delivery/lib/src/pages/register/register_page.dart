@@ -4,7 +4,7 @@ import 'package:flutter_delivery/src/pages/register/register_controller.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({Key? key}) : super(key: key);
+  RegisterPage({Key key}) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -15,7 +15,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance!.addPersistentFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPersistentFrameCallback((timeStamp) {
       _controller.init(context);
     });
   }

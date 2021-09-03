@@ -5,7 +5,7 @@ import 'package:flutter_delivery/src/pages/login/login_controller.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance!.addPersistentFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPersistentFrameCallback((timeStamp) {
       _controller.init(context);
     });
   }

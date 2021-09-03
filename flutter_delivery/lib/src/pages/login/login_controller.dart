@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class LoginController {
-  late BuildContext context;
+   BuildContext context;
   //controladores
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future? init(BuildContext context) {
+  Future init(BuildContext context) {
     this.context = context;
   }
 

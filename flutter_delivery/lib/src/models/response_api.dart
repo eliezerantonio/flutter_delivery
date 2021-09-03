@@ -1,11 +1,41 @@
 // To parse this JSON data, do
 //
-//     final user = userFromJson(jsonString);
+//     final responseApi = responseApiFromJson(jsonString);
 
 import 'dart:convert';
 
-import 'package:flutter_delivery/src/models/user.dart';
+ResponseApi responseApiFromJson(String str) =>
+    ResponseApi.fromJson(json.decode(str));
 
-User userFromJson(String str) => User.fromJson(json.decode(str));
+String responseApiToJson(ResponseApi data) => json.encode(data.toJson());
 
-String userToJson(User data) => json.encode(data.toJson());
+class ResponseApi {
+  ResponseApi({
+    this.success,
+    this.message,
+    this.error,
+    this.data,
+  });
+
+  bool success;
+  String error;
+  String message;
+  dynamic data;
+
+  ResponseApi.fromJson(Map<String, dynamic> json) {
+    success = json["success"];
+    message = json["message"];
+    error = json["error"];
+
+    try {
+      data = json["data"];
+    } catch (e) {
+      print("Exception data $e");
+    }
+  }
+  Map<String, dynamic> toJson() => {
+        "success": success,
+        "message": message,
+        "error": error,
+      };
+}

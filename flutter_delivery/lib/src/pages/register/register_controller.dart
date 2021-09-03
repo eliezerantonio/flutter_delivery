@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RegisterController {
-  late BuildContext context;
+   BuildContext context;
   //controladores
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -10,7 +10,7 @@ class RegisterController {
   TextEditingController phoneController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
-  Future? init(BuildContext context) {
+  Future init(BuildContext context) {
     this.context = context;
   }
 
