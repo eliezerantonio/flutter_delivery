@@ -60,6 +60,6 @@ class RegisterController {
     ResponseApi responseApi = await usersProvider.create(user);
 
     MySnackbar.show(context, responseApi.message);
-    // print(responseApi.message);
+   print(responseApi.toJson());
   }
 }
