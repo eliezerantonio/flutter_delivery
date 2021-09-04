@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginController {
-   BuildContext context;
+  BuildContext context;
   //controladores
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -10,8 +10,10 @@ class LoginController {
     this.context = context;
   }
 
-  void goToRegisterPage(BuildContext context) {
-    Navigator.pushNamed(context, 'register');
+  void goToRegisterPage() {
+    if (context != null) {
+      Navigator.pushNamed(context, 'register');
+    }
   }
 
   void login() {

@@ -30,11 +30,12 @@ class _LoginPageState extends State<LoginPage> {
         child: Stack(
           children: [
             SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
                   _lottieAnimation(),
-                  _texFieldEmail(),
-                  _texFieldPassword(),
+                  _textFieldEmail(),
+                  _textFieldPassword(),
                   _buttonLogin(),
                   _textDontHaveAccount()
                 ],
@@ -91,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
           width: 7,
         ),
         GestureDetector(
-          onTap: () => _controller.goToRegisterPage(context),
+          onTap: _controller.goToRegisterPage,
           child: Text(
             'Criar agora',
             style: TextStyle(
@@ -114,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
         style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
           ),
           padding: EdgeInsets.symmetric(vertical: 15),
         ),
@@ -133,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _texFieldEmail() {
+  Widget _textFieldEmail() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
       decoration: BoxDecoration(
@@ -156,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _texFieldPassword() {
+  Widget _textFieldPassword() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
       decoration: BoxDecoration(
@@ -175,20 +176,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
           contentPadding: EdgeInsets.all(15),
         ),
-      ),
-    );
-  }
-
-  Widget _imageBaner() {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 100,
-        bottom: MediaQuery.of(context).size.height * 0.22,
-      ),
-      child: Image.asset(
-        "assets/img/delivery.png",
-        width: 200,
-        height: 200,
       ),
     );
   }
