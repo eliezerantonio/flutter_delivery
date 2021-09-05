@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPersistentFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _controller.init(context);
     });
   }
@@ -110,7 +110,11 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
       child: ElevatedButton(
-        onPressed: _controller.login,
+        onPressed: () {
+          if (mounted) {
+            _controller.login();
+          }
+        },
         child: Text("Entrar"),
         style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,

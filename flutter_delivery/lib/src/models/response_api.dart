@@ -33,9 +33,6 @@ class ResponseApi {
       print("Exception data $e");
     }
   }
-  Map<String, dynamic> toJson() => {
-        "success": success,
-        "message": message,
-        "error": error,
-      };
+  Map<String, dynamic> toJson() =>
+      {"success": success, "message": message, "error": error, "data": data};
 }
