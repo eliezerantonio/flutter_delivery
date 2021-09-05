@@ -18,7 +18,8 @@ class LoginController {
     this.context = context;
     await usersProvider.initState(context);
     User user = User.fromJson(await _sharedPref.read('user') ?? {});
-     print("Usuario logadou: ${user.roles[0].name}");
+    
+
     if (user?.sessionToken != null) {
       Navigator.pushReplacementNamed(context, 'client/products/list');
     }
@@ -37,7 +38,7 @@ class LoginController {
     if (responseApi.success) {
       User user = User.fromJson(responseApi.data);
 
-   
+   print(user.roles[0].name);
 
       _sharedPref.save('user', user.toJson());
       if (user.roles.length > 1) {

@@ -38,7 +38,7 @@ class User {
         roles: json["roles"] == null
             ? []
             : List<Role>.from(
-                    json['roles'].map((model) => Role.fromJson(json))) ??
+                    json['roles'].map((model) => Role.fromJson(model))) ??
                 [],
       );
 
