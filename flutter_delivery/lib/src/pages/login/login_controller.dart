@@ -38,6 +38,9 @@ class LoginController {
       User user = User.fromJson(responseApi.data);
 
       _sharedPref.save('user', user.toJson());
+      if (user.roles.length > 1) {
+        Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
+      }
       Navigator.pushNamedAndRemoveUntil(
           context, 'client/products/list', (route) => false);
     } else {

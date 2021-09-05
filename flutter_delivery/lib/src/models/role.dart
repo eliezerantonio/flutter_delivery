@@ -22,7 +22,7 @@ class Role {
   String route;
 
   factory Role.fromJson(Map<String, dynamic> json) => Role(
-        id: json["id"],
+        id: json["id"] is int ? json['id'].toString() : json['id'],
         name: json["name"],
         image: json["image"],
         route: json["route"],
