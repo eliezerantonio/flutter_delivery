@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/models/response_api.dart';
+import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/provider/users_provider.dart';
 import 'package:flutter_delivery/src/utils/my_snackbar.dart';
+import 'package:flutter_delivery/src/utils/shared_prefs.dart';
 
 class LoginController {
   BuildContext context;
@@ -10,10 +12,15 @@ class LoginController {
   TextEditingController passwordController = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
+  SharedPref _sharedPref = SharedPref();
 
   Future init(BuildContext context) async {
     this.context = context;
     await usersProvider.initState(context);
+    User user = User.fromJson(await _sharedPref.read('user') ?? {});
+    if (user.sessionToken != null) {
+      Navigator.pushReplacementNamed(context, 'client/products/list');
+    }
   }
 
   void goToRegisterPage() {
@@ -26,6 +33,12 @@ class LoginController {
     String email = emailController.text;
     String password = passwordController.text;
     ResponseApi responseApi = await usersProvider.login(email, password);
-    MySnackbar.show(context, responseApi.message ?? "");
+    if (responseApi.success) {
+      User user = User.fromJson(responseApi.data);
+      Navigator.pushNamedAndRemoveUntil(
+          context, 'client/products/list', (route) => false);
+    } else {
+      MySnackbar.show(context, responseApi.message);
+    }
   }
 }
