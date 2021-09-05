@@ -1,17 +1,18 @@
 import 'package:flutter_delivery/src/models/role.dart';
 
 class User {
-  User(
-      {this.id,
-      this.email,
-      this.name,
-      this.lastname,
-      this.phone,
-      this.image,
-      this.password,
-      this.isAvailable,
-      this.sessionToken,
-      this.roles});
+  User({
+    this.id,
+    this.email,
+    this.name,
+    this.lastname,
+    this.phone,
+    this.image,
+    this.password,
+    this.isAvailable,
+    this.sessionToken,
+    this.roles,
+  });
 
   String id;
   String email;
