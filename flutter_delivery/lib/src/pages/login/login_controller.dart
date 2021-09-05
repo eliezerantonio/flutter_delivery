@@ -18,7 +18,7 @@ class LoginController {
     this.context = context;
     await usersProvider.initState(context);
     User user = User.fromJson(await _sharedPref.read('user') ?? {});
-
+    print(user.toJson());
     if (user?.sessionToken != null) {
       Navigator.pushReplacementNamed(context, 'client/products/list');
     }
@@ -37,12 +37,15 @@ class LoginController {
     if (responseApi.success) {
       User user = User.fromJson(responseApi.data);
 
+      print("Usuario logado: ${user.toJson()}");
+
       _sharedPref.save('user', user.toJson());
       if (user.roles.length > 1) {
         Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, user.roles[0].route, (route) => false);
       }
-      Navigator.pushNamedAndRemoveUntil(
-          context, 'client/products/list', (route) => false);
     } else {
       MySnackbar.show(context, responseApi.message);
     }
