@@ -23,18 +23,22 @@ class _RolesPageState extends State<RolesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-          children: rolesController.user != null
-              ? rolesController.user.roles
-                  .map((role) => _cardRole(role))
-                  .toList()
-              : []),
+      body: Container(
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.14),
+        child: ListView(
+            children: rolesController.user != null
+                ? rolesController.user.roles
+                    .map((role) => _cardRole(role))
+                    .toList()
+                : []),
+      ),
     );
   }
 
   Widget _cardRole(Role role) {
-    print(role.image);
+    print(role.name);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           width: 100,
@@ -53,16 +57,17 @@ class _RolesPageState extends State<RolesPage> {
           role.name ?? "",
           style: TextStyle(
             fontSize: 16,
-            color: Colors.white,
+            color: Colors.black,
           ),
-        )
+        ),
+        SizedBox(
+          height: 50,
+        ),
       ],
     );
-
-
   }
 
-    void refresh() {
+  void refresh() {
     setState(() {});
   }
 }
