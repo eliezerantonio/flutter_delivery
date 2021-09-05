@@ -24,7 +24,7 @@ class _RolesPageState extends State<RolesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.14),
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
         child: ListView(
             children: rolesController.user != null
                 ? rolesController.user.roles
@@ -36,34 +36,37 @@ class _RolesPageState extends State<RolesPage> {
   }
 
   Widget _cardRole(Role role) {
-    print(role.name);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: 100,
-          child: FadeInImage(
-            placeholder: AssetImage('assets/img/no-image.png'),
-            image: role.image != null
-                ? NetworkImage(role.image)
-                : AssetImage(
-                    'assets/img/no-image.png',
-                  ),
-            fit: BoxFit.contain,
-            fadeInDuration: Duration(milliseconds: 50),
+  
+    return GestureDetector(
+      onTap:()=>rolesController.goToPage(role.route),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 100,
+            child: FadeInImage(
+              placeholder: AssetImage('assets/img/no-image.png'),
+              image: role.image != null
+                  ? NetworkImage(role.image)
+                  : AssetImage(
+                      'assets/img/no-image.png',
+                    ),
+              fit: BoxFit.contain,
+              fadeInDuration: Duration(milliseconds: 50),
+            ),
           ),
-        ),
-        Text(
-          role.name ?? "",
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.black,
+          Text(
+            role.name ?? "",
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 50,
-        ),
-      ],
+          SizedBox(
+            height: 50,
+          ),
+        ],
+      ),
     );
   }
 

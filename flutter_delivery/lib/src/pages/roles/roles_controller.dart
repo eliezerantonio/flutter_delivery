@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/utils/shared_prefs.dart';
@@ -13,5 +14,9 @@ class RolesController {
 //obtendo usuario de sesssao
     user = User.fromJson(await _sharedPrefs.read('user'));
     refresh();
+  }
+
+  void goToPage(String route) {
+    Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
   }
 }
