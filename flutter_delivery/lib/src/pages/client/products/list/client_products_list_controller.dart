@@ -4,12 +4,16 @@ import 'package:flutter_delivery/src/utils/shared_prefs.dart';
 class ClientProductsListController {
   BuildContext context;
   SharedPref _shared_prefs = new SharedPref();
-
+  GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
   Future init(BuildContext context) {
     this.context = context;
   }
 
-  logout() {
+  void logout() {
     _shared_prefs.logout(context);
+  }
+
+  void openDrawer() {
+    key.currentState.openDrawer();
   }
 }
