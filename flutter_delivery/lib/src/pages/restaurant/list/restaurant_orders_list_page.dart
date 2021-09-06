@@ -29,6 +29,9 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
       appBar: AppBar(
         leading: _menuDrawer(),
       ),
+      body: Center(
+        child: Text("Centro"),
+      ),
     );
   }
 
@@ -99,14 +102,6 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
                 ],
               ),
             ),
-          ),
-          ListTile(
-            title: Text("Editar Perfil"),
-            trailing: Icon(Icons.edit_outlined),
-          ),
-          ListTile(
-            title: Text("Meus Pedidos"),
-            trailing: Icon(Icons.shopping_cart_outlined),
           ),
           ListTile(
             title: Text("Selecionar regra"),
