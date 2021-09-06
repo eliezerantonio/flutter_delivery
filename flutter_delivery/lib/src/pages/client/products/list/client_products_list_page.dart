@@ -118,6 +118,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
             trailing: Icon(Icons.person),
           ),
           ListTile(
+            onTap: _controller.logout,
             title: Text("Sair"),
             trailing: Icon(Icons.power_settings_new),
           ),
