@@ -7,8 +7,7 @@ class DeliveryOrdersListPage extends StatefulWidget {
   DeliveryOrdersListPage({Key key}) : super(key: key);
 
   @override
-  _DeliveryOrdersListPageState createState() =>
-      _DeliveryOrdersListPageState();
+  _DeliveryOrdersListPageState createState() => _DeliveryOrdersListPageState();
 }
 
 class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
@@ -31,7 +30,7 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
         leading: _menuDrawer(),
       ),
       body: Center(
-        child: Text("Centro"),
+        child: Text("Centro Delivery"),
       ),
     );
   }

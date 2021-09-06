@@ -30,7 +30,7 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
         leading: _menuDrawer(),
       ),
       body: Center(
-        child: Text("Centro"),
+        child: Text("Centro Restuarant"),
       ),
     );
   }
