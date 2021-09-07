@@ -7,6 +7,7 @@ import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/provider/users_provider.dart';
 import 'package:flutter_delivery/src/utils/my_snackbar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
 class RegisterController {
   BuildContext context;
@@ -22,10 +23,13 @@ class RegisterController {
   XFile pickedFile;
   File imageFile;
   Function refresh;
+  ProgressDialog _progressDialog;
+  bool isLoading;
   Future init(BuildContext context, Function refresh) {
     this.context = context;
     usersProvider.initState(context);
     this.refresh = refresh;
+    _progressDialog = ProgressDialog(context: context);
   }
 
   void backToLoginPage() {
@@ -61,7 +65,8 @@ class RegisterController {
     if (imageFile == null) {
       MySnackbar.show(context, "Selecione uma imagem");
     }
-
+    _progressDialog.show(max: 100, msg: "Realizando o cadastro");
+    isLoading = true;
     User user = User(
         email: email,
         password: password,
@@ -72,6 +77,8 @@ class RegisterController {
     Stream stream = await usersProvider.createWithImage(user, imageFile);
     stream.listen((res) {
       // ResponseApi responseApi=await usersProvider.create(user);
+      _progressDialog.close();
+        isLoading = false;
       ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
 
       MySnackbar.show(context, responseApi.message);
@@ -80,6 +87,8 @@ class RegisterController {
         Future.delayed(Duration(seconds: 3), () {
           Navigator.pushNamed(context, 'login');
         });
+      }else{
+         isLoading = false;
       }
     });
   }

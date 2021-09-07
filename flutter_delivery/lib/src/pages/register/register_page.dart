@@ -112,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
       child: ElevatedButton(
-        onPressed: _controller.register,
+        onPressed: _controller.isLoading ? null : _controller.register,
         child: Text("Cadastrar"),
         style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
