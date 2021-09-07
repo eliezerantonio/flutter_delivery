@@ -64,7 +64,9 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Nome do usuario",
+                    "${_controller.user?.name ?? ''} ${{
+                      _controller.user?.lastname
+                    }}",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -72,7 +74,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                     maxLines: 1,
                   ),
                   Text(
-                    "E-mail",
+                    "${_controller.user?.email ?? ''}",
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[200],
@@ -81,7 +83,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                     maxLines: 1,
                   ),
                   Text(
-                    "Phone",
+                    "${_controller.user?.phone ?? ''}",
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[200],
@@ -95,7 +97,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                     child: FadeInImage(
                       fit: BoxFit.contain,
                       fadeInDuration: Duration(milliseconds: 50),
-                      placeholder: AssetImage("assets/img/no-image.png"),
+                      placeholder: _controller.user?.image !=null? NetworkImage(_controller.user?.image): AssetImage("assets/img/no-image.png"),
                       image: AssetImage(
                         "assets/img/perfil6.jpeg",
                       ),

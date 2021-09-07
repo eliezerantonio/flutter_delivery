@@ -19,7 +19,7 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _controller.init(context);
     });
-  }
+  } 
 
   @override
   Widget build(BuildContext context) {
