@@ -62,9 +62,9 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${_controller.user?.name ?? ''} ${{
+                    "${_controller.user?.name ?? ''} ${
                       _controller.user?.lastname
-                    }}",
+                    }",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

@@ -18,8 +18,8 @@ class LoginController {
     this.context = context;
     await usersProvider.initState(context);
     User user = User.fromJson(await _sharedPref.read('user') ?? {});
-    
 
+    print(user.lastname);
     if (user?.sessionToken != null) {
       if (user.roles.length > 1) {
         Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
@@ -42,8 +42,7 @@ class LoginController {
     ResponseApi responseApi = await usersProvider.login(email, password);
     if (responseApi.success) {
       User user = User.fromJson(responseApi.data);
-
-
+      print(user.lastname);
       _sharedPref.save('user', user.toJson());
       if (user.roles.length > 1) {
         Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);

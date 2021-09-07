@@ -64,9 +64,9 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${_controller.user?.name ?? ''} ${{
+                    "${_controller.user?.name ?? ''} ${
                       _controller.user?.lastname
-                    }}",
+                    }",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
