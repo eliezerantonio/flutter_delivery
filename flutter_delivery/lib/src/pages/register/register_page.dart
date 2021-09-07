@@ -16,7 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _controller.init(context);
+      _controller.init(context, refresh);
     });
   }
 
@@ -78,7 +78,9 @@ class _RegisterPageState extends State<RegisterPage> {
           bottom: MediaQuery.of(context).size.height * 0.07,
         ),
         child: CircleAvatar(
-          backgroundImage: AssetImage("assets/img/avatar.png"),
+          backgroundImage: _controller.imageFile != null
+              ? FileImage(_controller.imageFile)
+              : AssetImage("assets/img/avatar.png"),
           radius: 55,
         ),
       ),
@@ -257,5 +259,9 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  void refresh() {
+    setState(() {});
   }
 }

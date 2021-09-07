@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/models/response_api.dart';
 import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/provider/users_provider.dart';
 import 'package:flutter_delivery/src/utils/my_snackbar.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterController {
   BuildContext context;
@@ -15,9 +19,13 @@ class RegisterController {
   TextEditingController confirmPasswordController = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
-  Future init(BuildContext context) {
+  XFile pickedFile;
+  File imageFile;
+  Function refresh;
+  Future init(BuildContext context, Function refresh) {
     this.context = context;
     usersProvider.initState(context);
+    this.refresh = refresh;
   }
 
   void backToLoginPage() {
@@ -50,31 +58,44 @@ class RegisterController {
       return;
     }
 
+    if (imageFile == null) {
+      MySnackbar.show(context, "Selecione uma imagem");
+    }
+
     User user = User(
         email: email,
         password: password,
         name: name,
         lastname: lastname,
         phone: phone);
-    ResponseApi responseApi = await usersProvider.create(user);
 
-    MySnackbar.show(context, responseApi.message);
+    Stream stream = await usersProvider.createWithImage(user, imageFile);
+    stream.listen((res) {
+      // ResponseApi responseApi=await usersProvider.create(user);
+      ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
 
-    if (responseApi.success) {
-      Future.delayed(Duration(seconds: 3), () {
-        Navigator.pushNamed(context, 'login');
-      });
-    }
+      MySnackbar.show(context, responseApi.message);
+
+      if (responseApi.success) {
+        Future.delayed(Duration(seconds: 3), () {
+          Navigator.pushNamed(context, 'login');
+        });
+      }
+    });
   }
 
   void showAlertDialog() {
     Widget galleryButton = ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        selectImage(ImageSource.gallery);
+      },
       child: Text("Galeria"),
     );
 
     Widget cameraButton = ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        selectImage(ImageSource.camera);
+      },
       child: Text("Camera"),
     );
 
@@ -90,5 +111,14 @@ class RegisterController {
         builder: (context) {
           return alertDialog;
         });
+  }
+
+  Future selectImage(ImageSource imageSource) async {
+    pickedFile = await ImagePicker().pickImage(source: imageSource);
+    if (pickedFile != null) {
+      imageFile = File(pickedFile.path);
+    }
+    Navigator.of(context).pop();
+    refresh();
   }
 }
