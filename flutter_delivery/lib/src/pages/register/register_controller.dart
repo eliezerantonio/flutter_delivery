@@ -56,7 +56,6 @@ class RegisterController {
         name: name,
         lastname: lastname,
         phone: phone);
-    print(user.name);
     ResponseApi responseApi = await usersProvider.create(user);
 
     MySnackbar.show(context, responseApi.message);
@@ -66,5 +65,30 @@ class RegisterController {
         Navigator.pushNamed(context, 'login');
       });
     }
+  }
+
+  void showAlertDialog() {
+    Widget galleryButton = ElevatedButton(
+      onPressed: () {},
+      child: Text("Galeria"),
+    );
+
+    Widget cameraButton = ElevatedButton(
+      onPressed: () {},
+      child: Text("Camera"),
+    );
+
+    AlertDialog alertDialog = AlertDialog(
+      title: Text("Selecionar imagem"),
+      actions: [
+        galleryButton,
+        cameraButton,
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (context) {
+          return alertDialog;
+        });
   }
 }

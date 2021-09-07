@@ -70,14 +70,17 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _imageUser() {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 130,
-        bottom: MediaQuery.of(context).size.height * 0.07,
-      ),
-      child: CircleAvatar(
-        backgroundImage: AssetImage("assets/img/avatar.png"),
-        radius: 55,
+    return GestureDetector(
+      onTap: _controller.showAlertDialog,
+      child: Container(
+        margin: EdgeInsets.only(
+          top: 130,
+          bottom: MediaQuery.of(context).size.height * 0.07,
+        ),
+        child: CircleAvatar(
+          backgroundImage: AssetImage("assets/img/avatar.png"),
+          radius: 55,
+        ),
       ),
     );
   }
