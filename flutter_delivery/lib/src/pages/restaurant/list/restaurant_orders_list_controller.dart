@@ -21,4 +21,8 @@ class RestaurantOrdersListController {
   void openDrawer() {
     key.currentState.openDrawer();
   }
+
+  void goToRoles() {
+    Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
+  }
 }

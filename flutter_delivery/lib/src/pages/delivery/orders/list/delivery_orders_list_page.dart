@@ -113,7 +113,8 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
             title: Text("Meus Pedidos"),
             trailing: Icon(Icons.shopping_cart_outlined),
           ),
-          ListTile(
+         ListTile(
+            onTap: _controller.goToRoles,
             title: Text("Selecionar regra"),
             trailing: Icon(Icons.person),
           ),

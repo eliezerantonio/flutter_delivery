@@ -21,4 +21,7 @@ class DeliveryOrdersListController {
   void openDrawer() {
     key.currentState.openDrawer();
   }
+   void goToRoles() {
+    Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
+  }
 }

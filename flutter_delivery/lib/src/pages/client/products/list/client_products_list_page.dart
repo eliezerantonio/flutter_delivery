@@ -64,9 +64,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${_controller.user?.name ?? ''} ${
-                      _controller.user?.lastname
-                    }",
+                    "${_controller.user?.name ?? ''} ${_controller.user?.lastname}",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -117,10 +115,12 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
             title: Text("Meus Pedidos"),
             trailing: Icon(Icons.shopping_cart_outlined),
           ),
-          ListTile(
-            title: Text("Selecionar regra"),
-            trailing: Icon(Icons.person),
-          ),
+          if (_controller.user != null && _controller.user.roles.length > 1)
+            ListTile(
+              onTap: _controller.goToRoles,
+              title: Text("Selecionar regra"),
+              trailing: Icon(Icons.person),
+            ),
           ListTile(
             onTap: _controller.logout,
             title: Text("Sair"),
