@@ -5,6 +5,7 @@ import 'package:flutter_delivery/src/pages/restaurant/list/restaurant_orders_lis
 import 'package:flutter_delivery/src/pages/roles/roles_page.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
+import 'src/pages/client/update/client_update_page.dart';
 import 'src/pages/login/login_page.dart';
 import 'src/pages/register/register_page.dart';
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         'client/products/list': (_) => ClientProductsListPage(),
         'delivery/orders/list': (_) => DeliveryOrdersListPage(),
         'restaurant/orders/list': (_) => RestaunrantOrdersListPage(),
+        'client/update': (_) => ClientUpdatePage(),
       },
       theme: ThemeData(
         // fontFamily: 'NimbusSans',
