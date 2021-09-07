@@ -16,7 +16,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _controller.init(context);
+      _controller.init(context, refresh);
     });
   }
 
@@ -97,7 +97,9 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                     child: FadeInImage(
                       fit: BoxFit.contain,
                       fadeInDuration: Duration(milliseconds: 50),
-                      placeholder: _controller.user?.image !=null? NetworkImage(_controller.user?.image): AssetImage("assets/img/no-image.png"),
+                      placeholder: _controller.user?.image != null
+                          ? NetworkImage(_controller.user?.image)
+                          : AssetImage("assets/img/no-image.png"),
                       image: AssetImage(
                         "assets/img/perfil6.jpeg",
                       ),
@@ -127,5 +129,9 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
         ],
       ),
     );
+  }
+
+  void refresh() {
+    setState(() {});
   }
 }

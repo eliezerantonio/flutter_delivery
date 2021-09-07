@@ -17,7 +17,7 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _controller.init(context);
+      _controller.init(context, refresh);
     });
   }
 
@@ -62,7 +62,9 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Nome do usuario",
+                    "${_controller.user?.name ?? ''} ${{
+                      _controller.user?.lastname
+                    }}",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -70,7 +72,7 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
                     maxLines: 1,
                   ),
                   Text(
-                    "E-mail",
+                    "${_controller.user?.email ?? ''}",
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[200],
@@ -79,7 +81,7 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
                     maxLines: 1,
                   ),
                   Text(
-                    "Phone",
+                    "${_controller.user?.phone ?? ''}",
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[200],
@@ -93,7 +95,9 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
                     child: FadeInImage(
                       fit: BoxFit.contain,
                       fadeInDuration: Duration(milliseconds: 50),
-                      placeholder: AssetImage("assets/img/no-image.png"),
+                      placeholder: _controller.user?.image != null
+                          ? NetworkImage(_controller.user?.image)
+                          : AssetImage("assets/img/no-image.png"),
                       image: AssetImage(
                         "assets/img/perfil6.jpeg",
                       ),
@@ -102,6 +106,14 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
                 ],
               ),
             ),
+          ),
+          ListTile(
+            title: Text("Editar Perfil"),
+            trailing: Icon(Icons.edit_outlined),
+          ),
+          ListTile(
+            title: Text("Meus Pedidos"),
+            trailing: Icon(Icons.shopping_cart_outlined),
           ),
           ListTile(
             title: Text("Selecionar regra"),
@@ -115,5 +127,9 @@ class _DeliveryOrdersListPageState extends State<DeliveryOrdersListPage> {
         ],
       ),
     );
+  }
+
+  void refresh() {
+    setState(() {});
   }
 }

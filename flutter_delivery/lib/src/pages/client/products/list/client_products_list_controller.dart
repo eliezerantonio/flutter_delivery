@@ -8,9 +8,10 @@ class ClientProductsListController {
   GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
 
   User user;
-  Future init(BuildContext context) async{
+  Future init(BuildContext context, Function refresh) async {
     this.context = context;
     user = User.fromJson(await _shared_prefs.read('user'));
+    refresh();
   }
 
   void logout() {
