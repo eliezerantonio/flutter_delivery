@@ -4,18 +4,18 @@ import 'package:flutter_delivery/src/utils/shared_prefs.dart';
 
 class RestaurantOrdersListController {
   BuildContext context;
-  SharedPref _shared_prefs = new SharedPref();
+  SharedPref _sharedPrefs = new SharedPref();
   GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
 
   User user;
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
-    user = User.fromJson(await _shared_prefs.read('user'));
+    user = User.fromJson(await _sharedPrefs.read('user'));
     refresh();
   }
 
   void logout() {
-    _shared_prefs.logout(context);
+    _sharedPrefs.logout(context);
   }
 
   void openDrawer() {

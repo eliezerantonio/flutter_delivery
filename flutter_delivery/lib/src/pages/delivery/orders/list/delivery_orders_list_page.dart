@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_delivery/src/pages/delivery/orders/list/delivery_orders_list_controller.dart';
-import 'package:flutter_delivery/src/pages/restaurant/list/restaurant_orders_list_controller.dart';
 
 class DeliveryOrdersListPage extends StatefulWidget {
   DeliveryOrdersListPage({Key key}) : super(key: key);

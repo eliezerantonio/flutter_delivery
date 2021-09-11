@@ -25,7 +25,7 @@ class ClientUpdateController {
   Function refresh;
   ProgressDialog _progressDialog;
   bool isLoading;
-  Future init(BuildContext context, Function refresh) {
+  Future<void> init(BuildContext context, Function refresh)async {
     this.context = context;
     usersProvider.initState(context);
     this.refresh = refresh;

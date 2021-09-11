@@ -13,7 +13,7 @@ class UsersProvider {
 
   BuildContext context;
 
-  Future initState(BuildContext context) {
+  Future<void> initState(BuildContext context) async{
     this.context = context;
   }
 
