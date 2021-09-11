@@ -23,38 +23,25 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Editar perfil"),
+      ),
       body: Container(
         width: double.infinity,
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  _imageUser(),
-                  _texFieldEmail(),
-                  _texFieldName(),
-                  _texFieldLastName(),
-                  _texFieldLastPhone(),
-                  _texFieldPassword(),
-                  _texFieldConfirmPassword(),
-                  _buttonLogin(),
-                ],
-              ),
-            ),
-            Positioned(
-              left: -100,
-              top: -80,
-              child: _circleLogin(),
-            ),
-            Positioned(
-              top: 60,
-              left: 10,
-              child: _textRegister(),
-            ),
-          ],
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              _imageUser(),
+              _texFieldName(),
+              _texFieldLastName(),
+              _texFieldLastPhone(),
+              _texFieldPassword(),
+            ],
+          ),
         ),
       ),
+      bottomNavigationBar: _buttonLogin(),
     );
   }
 
@@ -74,7 +61,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
       onTap: _controller.showAlertDialog,
       child: Container(
         margin: EdgeInsets.only(
-          top: 130,
+          top: MediaQuery.of(context).size.height * 0.07,
           bottom: MediaQuery.of(context).size.height * 0.07,
         ),
         child: CircleAvatar(
@@ -113,36 +100,13 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
       margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
       child: ElevatedButton(
         onPressed: _controller.isLoading ? null : _controller.register,
-        child: Text("Cadastrar"),
+        child: Text("Atualizar"),
         style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
           padding: EdgeInsets.symmetric(vertical: 15),
-        ),
-      ),
-    );
-  }
-
-  Widget _texFieldEmail() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
-      decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
-      child: TextField(
-        controller: _controller.emailController,
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          hintText: 'E-mail',
-          border: InputBorder.none,
-          hintStyle: TextStyle(color: MyColors.primaryColorDark),
-          prefixIcon: Icon(
-            Icons.email,
-            color: MyColors.primaryColor,
-          ),
-          contentPadding: EdgeInsets.all(15),
         ),
       ),
     );
@@ -230,29 +194,6 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
           hintStyle: TextStyle(color: MyColors.primaryColorDark),
           prefixIcon: Icon(
             Icons.lock,
-            color: MyColors.primaryColor,
-          ),
-          contentPadding: EdgeInsets.all(15),
-        ),
-      ),
-    );
-  }
-
-  Widget _texFieldConfirmPassword() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
-      decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
-      child: TextField(
-        controller: _controller.confirmPasswordController,
-        obscureText: true,
-        decoration: InputDecoration(
-          hintText: 'Confrima senha',
-          border: InputBorder.none,
-          hintStyle: TextStyle(color: MyColors.primaryColorDark),
-          prefixIcon: Icon(
-            Icons.lock_open,
             color: MyColors.primaryColor,
           ),
           contentPadding: EdgeInsets.all(15),
