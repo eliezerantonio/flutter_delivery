@@ -25,4 +25,9 @@ class ClientProductsListController {
   void goToRoles() {
     Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
   }
+
+  void goToUpdate() {
+    Navigator.pushNamedAndRemoveUntil(
+        context, 'client/update', (route) => false);
+  }
 }
