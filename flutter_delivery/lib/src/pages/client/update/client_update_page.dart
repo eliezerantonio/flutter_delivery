@@ -36,7 +36,6 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
               _texFieldName(),
               _texFieldLastName(),
               _texFieldLastPhone(),
-              _texFieldPassword(),
             ],
           ),
         ),
@@ -171,29 +170,6 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
           hintStyle: TextStyle(color: MyColors.primaryColorDark),
           prefixIcon: Icon(
             Icons.phone,
-            color: MyColors.primaryColor,
-          ),
-          contentPadding: EdgeInsets.all(15),
-        ),
-      ),
-    );
-  }
-
-  Widget _texFieldPassword() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
-      decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
-      child: TextField(
-        controller: _controller.passwordController,
-        obscureText: true,
-        decoration: InputDecoration(
-          hintText: 'Senha',
-          border: InputBorder.none,
-          hintStyle: TextStyle(color: MyColors.primaryColorDark),
-          prefixIcon: Icon(
-            Icons.lock,
             color: MyColors.primaryColor,
           ),
           contentPadding: EdgeInsets.all(15),

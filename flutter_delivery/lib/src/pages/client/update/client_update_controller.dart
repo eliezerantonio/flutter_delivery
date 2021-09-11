@@ -12,12 +12,9 @@ import 'package:sn_progress_dialog/progress_dialog.dart';
 class ClientUpdateController {
   BuildContext context;
   //controladores
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
   XFile pickedFile;
@@ -37,28 +34,12 @@ class ClientUpdateController {
   }
 
   void register() async {
-    String email = emailController.text.trim();
-    String password = passwordController.text.trim();
     String name = nameController.text.trim();
     String lastname = lastnameController.text.trim();
-    String confirmPassword = confirmPasswordController.text.trim();
     String phone = phoneController.text.trim();
 
-    if (email.isEmpty ||
-        password.isEmpty ||
-        confirmPassword.isEmpty ||
-        phone.isEmpty ||
-        name.isEmpty ||
-        lastname.isEmpty) {
+    if (phone.isEmpty || name.isEmpty || lastname.isEmpty) {
       MySnackbar.show(context, "Preencha todos campos");
-      return;
-    }
-    if (password.isEmpty != confirmPassword.isEmpty) {
-      MySnackbar.show(context, "Senhas Diferentes");
-      return;
-    }
-    if (password.length < 6) {
-      MySnackbar.show(context, "Senha muito curta");
       return;
     }
 
@@ -67,12 +48,7 @@ class ClientUpdateController {
     }
     _progressDialog.show(max: 100, msg: "Realizando o cadastro");
     isLoading = true;
-    User user = User(
-        email: email,
-        password: password,
-        name: name,
-        lastname: lastname,
-        phone: phone);
+    User user = User(name: name, lastname: lastname, phone: phone);
 
     Stream stream = await usersProvider.createWithImage(user, imageFile);
     stream.listen((res) {
