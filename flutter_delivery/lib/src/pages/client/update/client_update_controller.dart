@@ -7,6 +7,7 @@ import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/provider/users_provider.dart';
 import 'package:flutter_delivery/src/utils/my_snackbar.dart';
 import 'package:flutter_delivery/src/utils/shared_prefs.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
 
@@ -67,9 +68,8 @@ class ClientUpdateController {
       isLoading = false;
       ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
 
-      MySnackbar.show(context, responseApi.message);
-
       if (responseApi.success) {
+        Fluttertoast.showToast(msg: responseApi.message);
         Future.delayed(Duration(seconds: 3), () {
           Navigator.pushNamed(context, 'client/products/list');
         });
