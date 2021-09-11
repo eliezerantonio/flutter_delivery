@@ -59,17 +59,29 @@ class ClientUpdateController {
     }
     _progressDialog.show(max: 100, msg: "Atualizando");
     isLoading = true;
-    User user = User(name: name, lastname: lastname, phone: phone);
+    User myUser = User(
+      id: user.id,
+      name: name,
+      lastname: lastname,
+      phone: phone,
+    );
 
-    Stream stream = await usersProvider.update(user, imageFile);
-    stream.listen((res) {
+    Stream stream = await usersProvider.update(myUser, imageFile);
+    stream.listen((res) async {
       // ResponseApi responseApi=await usersProvider.create(user);
       _progressDialog.close();
       isLoading = false;
       ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
 
       if (responseApi.success) {
+        user = await usersProvider.getById(
+            myUser.id); //obter usuario da base e guardar e, shared prefs
+        _sharedPrefs.save(
+          'user',
+          user.toJson(),
+        );
         Fluttertoast.showToast(msg: responseApi.message);
+
         Future.delayed(Duration(seconds: 3), () {
           Navigator.pushNamed(context, 'client/products/list');
         });

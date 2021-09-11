@@ -96,4 +96,23 @@ class UsersProvider {
       return null;
     }
   }
+
+  Future<User> getById(String id) async {
+    try {
+      Uri url = Uri.http(_url, "$_api/findById/$id");
+      Map<String, String> headers = {'Content-Type': 'application/json'};
+      final res = await http.get(
+        url,
+        headers: headers,
+      );
+      final data = json.decode(res.body);
+
+      User user = User.fromJson(data);
+
+      return user;
+    } catch (e) {
+      print("Error: $e");
+      return null;
+    }
+  }
 }
