@@ -13,7 +13,7 @@ class UsersProvider {
 
   BuildContext context;
 
-  Future<void> initState(BuildContext context) async{
+  Future<void> initState(BuildContext context) async {
     this.context = context;
   }
 
@@ -21,6 +21,27 @@ class UsersProvider {
     try {
       Uri url = Uri.http(_url, "$_api/create");
       final request = http.MultipartRequest('POST', url);
+
+      if (image != null) {
+        request.files.add(http.MultipartFile('image',
+            http.ByteStream(image.openRead().cast()), await image.length(),
+            filename: basename(image.path)));
+      }
+
+      request.fields['user'] = json.encode(user);
+
+      final response = await request.send(); //Enviar peticion
+      return response.stream.transform(utf8.decoder);
+    } catch (e) {
+      print("Error $e");
+      return null;
+    }
+  }
+
+  Future<Stream> update(User user, File image) async {
+    try {
+      Uri url = Uri.http(_url, "$_api/update");
+      final request = http.MultipartRequest('PUT', url);
 
       if (image != null) {
         request.files.add(http.MultipartFile('image',

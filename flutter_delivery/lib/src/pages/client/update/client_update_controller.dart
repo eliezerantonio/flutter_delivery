@@ -29,22 +29,21 @@ class ClientUpdateController {
 
   Future<void> init(BuildContext context, Function refresh) async {
     this.context = context;
-    usersProvider.initState(context);
+    this.usersProvider.initState(context);
     this.refresh = refresh;
-    _progressDialog = ProgressDialog(context: context);
-    user = User.fromJson(await _sharedPrefs.read('user'));
-    nameController.text = user.name;
-    phoneController.text = user.phone;
-    lastnameController.text = user.lastname;
-
-    refresh();
+    this._progressDialog = ProgressDialog(context: context);
+    this.user = User.fromJson(await _sharedPrefs.read('user'));
+    this.nameController.text = user.name;
+    this.phoneController.text = user.phone;
+    this.lastnameController.text = user.lastname;
+    this.refresh();
   }
 
   void backToLoginPage() {
     Navigator.pop(context);
   }
 
-  void register() async {
+  void update() async {
     String name = nameController.text.trim();
     String lastname = lastnameController.text.trim();
     String phone = phoneController.text.trim();
@@ -57,11 +56,11 @@ class ClientUpdateController {
     if (imageFile == null) {
       MySnackbar.show(context, "Selecione uma imagem");
     }
-    _progressDialog.show(max: 100, msg: "Realizando o cadastro");
+    _progressDialog.show(max: 100, msg: "Atualizando");
     isLoading = true;
     User user = User(name: name, lastname: lastname, phone: phone);
 
-    Stream stream = await usersProvider.createWithImage(user, imageFile);
+    Stream stream = await usersProvider.update(user, imageFile);
     stream.listen((res) {
       // ResponseApi responseApi=await usersProvider.create(user);
       _progressDialog.close();
@@ -72,7 +71,7 @@ class ClientUpdateController {
 
       if (responseApi.success) {
         Future.delayed(Duration(seconds: 3), () {
-          Navigator.pushNamed(context, 'login');
+          Navigator.pushNamed(context, 'client/products/list');
         });
       } else {
         isLoading = false;

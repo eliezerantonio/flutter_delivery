@@ -99,7 +99,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                           ? NetworkImage(_controller.user?.image)
                           : AssetImage("assets/img/no-image.png"),
                       image: AssetImage(
-                        "assets/img/perfil6.jpeg",
+                        "assets/img/no-image.png",
                       ),
                     ),
                   ),

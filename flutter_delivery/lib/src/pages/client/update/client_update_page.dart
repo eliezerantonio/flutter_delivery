@@ -44,17 +44,6 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
     );
   }
 
-  Widget _circleLogin() {
-    return Container(
-      width: 240,
-      height: 230,
-      decoration: BoxDecoration(
-        color: Colors.red,
-        borderRadius: BorderRadius.circular(100),
-      ),
-    );
-  }
-
   Widget _imageUser() {
     return GestureDetector(
       onTap: _controller.showAlertDialog,
@@ -75,13 +64,12 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
     );
   }
 
-  
   Widget _buttonLogin() {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
       child: ElevatedButton(
-        onPressed: _controller.isLoading ? null : _controller.register,
+        onPressed: _controller.isLoading ? null : _controller.update,
         child: Text("Atualizar"),
         style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
