@@ -6,6 +6,7 @@ import 'package:flutter_delivery/src/models/response_api.dart';
 import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/provider/users_provider.dart';
 import 'package:flutter_delivery/src/utils/my_snackbar.dart';
+import 'package:flutter_delivery/src/utils/shared_prefs.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
 
@@ -22,11 +23,21 @@ class ClientUpdateController {
   Function refresh;
   ProgressDialog _progressDialog;
   bool isLoading = false;
+
+  User user;
+  SharedPref _sharedPrefs = new SharedPref();
+
   Future<void> init(BuildContext context, Function refresh) async {
     this.context = context;
     usersProvider.initState(context);
     this.refresh = refresh;
     _progressDialog = ProgressDialog(context: context);
+    user = User.fromJson(await _sharedPrefs.read('user'));
+    nameController.text = user.name;
+    phoneController.text = user.phone;
+    lastnameController.text = user.lastname;
+
+    refresh();
   }
 
   void backToLoginPage() {

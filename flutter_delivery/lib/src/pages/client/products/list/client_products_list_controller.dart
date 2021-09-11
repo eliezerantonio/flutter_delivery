@@ -27,7 +27,9 @@ class ClientProductsListController {
   }
 
   void goToUpdate() {
-    Navigator.pushNamedAndRemoveUntil(
-        context, 'client/update', (route) => false);
+    Navigator.pushNamed(
+      context,
+      'client/update',
+    );
   }
 }

@@ -66,33 +66,16 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
         child: CircleAvatar(
           backgroundImage: _controller.imageFile != null
               ? FileImage(_controller.imageFile)
-              : AssetImage("assets/img/avatar.png"),
+              : _controller.user?.image != null
+                  ? NetworkImage(_controller.user?.image)
+                  : AssetImage("assets/img/avatar.png"),
           radius: 55,
         ),
       ),
     );
   }
 
-  Widget _textRegister() {
-    return GestureDetector(
-      onTap: () {
-        _controller.backToLoginPage();
-      },
-      child: Row(
-        children: [
-          Icon(Icons.arrow_back_ios, color: Colors.white),
-          Text("REGISTRO",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 18,
-                fontFamily: 'NimbusSans',
-              )),
-        ],
-      ),
-    );
-  }
-
+  
   Widget _buttonLogin() {
     return Container(
       width: double.infinity,
