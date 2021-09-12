@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_delivery/src/utils/shared_prefs.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/api/environment.dart';
@@ -12,9 +14,10 @@ class UsersProvider {
   String _api = '/api/users';
 
   BuildContext context;
-
-  Future<void> initState(BuildContext context) async {
+  String token;
+  Future<void> initState(BuildContext context, {String token}) async {
     this.context = context;
+    this.token = token;
   }
 
   Future<Stream> createWithImage(User user, File image) async {
@@ -38,33 +41,14 @@ class UsersProvider {
     }
   }
 
-  Future<Stream> update(User user, File image) async {
-    try {
-      Uri url = Uri.http(_url, "$_api/update");
-      final request = http.MultipartRequest('PUT', url);
-
-      if (image != null) {
-        request.files.add(http.MultipartFile('image',
-            http.ByteStream(image.openRead().cast()), await image.length(),
-            filename: basename(image.path)));
-      }
-
-      request.fields['user'] = json.encode(user);
-
-      final response = await request.send(); //Enviar peticion
-      return response.stream.transform(utf8.decoder);
-    } catch (e) {
-      print("Error $e");
-      return null;
-    }
-  }
-
   Future<ResponseApi> create(User user) async {
     try {
       Uri url = Uri.http(_url, "$_api/create");
       String bodyParams = json.encode(user);
 
-      Map<String, String> headers = {'Content-Type': 'application/json'};
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+      };
 
       final response = await http.post(url, headers: headers, body: bodyParams);
 
@@ -87,6 +71,11 @@ class UsersProvider {
       Map<String, String> headers = {'Content-Type': 'application/json'};
 
       final res = await http.post(url, headers: headers, body: bodyParams);
+      if (res.statusCode == 401) {
+        // nao autorizado
+        Fluttertoast.showToast(msg: 'Sessao expirada');
+        new SharedPref().logout(context);
+      }
       final data = json.decode(res.body);
       ResponseApi responseApi = new ResponseApi.fromJson(data);
 
@@ -97,14 +86,50 @@ class UsersProvider {
     }
   }
 
+  Future<Stream> update(User user, File image) async {
+    try {
+      Uri url = Uri.http(_url, "$_api/update");
+      final request = http.MultipartRequest('PUT', url);
+      request.headers['Authorization'] = token;
+
+      if (image != null) {
+        request.files.add(http.MultipartFile('image',
+            http.ByteStream(image.openRead().cast()), await image.length(),
+            filename: basename(image.path)));
+      }
+
+      request.fields['user'] = json.encode(user);
+
+      final response = await request.send(); //Enviar peticion
+      if (response.statusCode == 401) {
+        // nao autorizado
+        Fluttertoast.showToast(msg: 'Sessao expirada');
+        new SharedPref().logout(context);
+      }
+      return response.stream.transform(utf8.decoder);
+    } catch (e) {
+      print("Error $e");
+      return null;
+    }
+  }
+
   Future<User> getById(String id) async {
     try {
       Uri url = Uri.http(_url, "$_api/findById/$id");
-      Map<String, String> headers = {'Content-Type': 'application/json'};
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      };
       final res = await http.get(
         url,
         headers: headers,
       );
+
+      if (res.statusCode == 401) {
+        // nao autorizado
+        Fluttertoast.showToast(msg: 'Sessao expirada');
+        new SharedPref().logout(context);
+      }
       final data = json.decode(res.body);
 
       User user = User.fromJson(data);

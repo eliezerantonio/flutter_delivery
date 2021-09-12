@@ -30,10 +30,10 @@ class ClientUpdateController {
 
   Future<void> init(BuildContext context, Function refresh) async {
     this.context = context;
-    this.usersProvider.initState(context);
     this.refresh = refresh;
     this._progressDialog = ProgressDialog(context: context);
     this.user = User.fromJson(await _sharedPrefs.read('user'));
+    this.usersProvider.initState(context, token: this.user.sessionToken); 
     this.nameController.text = user.name;
     this.phoneController.text = user.phone;
     this.lastnameController.text = user.lastname;
@@ -45,50 +45,54 @@ class ClientUpdateController {
   }
 
   void update() async {
-    String name = nameController.text.trim();
-    String lastname = lastnameController.text.trim();
-    String phone = phoneController.text.trim();
+    try {
+      String name = nameController.text.trim();
+      String lastname = lastnameController.text.trim();
+      String phone = phoneController.text.trim();
 
-    if (phone.isEmpty || name.isEmpty || lastname.isEmpty) {
-      MySnackbar.show(context, "Preencha todos campos");
-      return;
-    }
+      if (phone.isEmpty || name.isEmpty || lastname.isEmpty) {
+        MySnackbar.show(context, "Preencha todos campos");
+        return;
+      }
 
-    if (imageFile == null) {
-      MySnackbar.show(context, "Selecione uma imagem");
-    }
-    _progressDialog.show(max: 100, msg: "Atualizando");
-    isLoading = true;
-    User myUser = User(
-      id: user.id,
-      name: name,
-      lastname: lastname,
-      phone: phone,
-    );
+      _progressDialog.show(max: 100, msg: "Atualizando");
+      isLoading = true;
+      User myUser = User(
+          id: user.id,
+          name: name,
+          lastname: lastname,
+          phone: phone,
+          image: user.image);
 
-    Stream stream = await usersProvider.update(myUser, imageFile);
-    stream.listen((res) async {
-      // ResponseApi responseApi=await usersProvider.create(user);
+      Stream stream = await usersProvider.update(myUser, imageFile);
+      stream.listen((res) async {
+        // ResponseApi responseApi=await usersProvider.create(user);
+        _progressDialog.close();
+        isLoading = false;
+        ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
+
+        if (responseApi.success) {
+          user = await usersProvider.getById(
+              myUser.id); //obter usuario da base e guardar e, shared prefs
+          _sharedPrefs.save(
+            'user',
+            user.toJson(),
+          );
+          Fluttertoast.showToast(msg: responseApi.message);
+
+          Future.delayed(Duration(seconds: 3), () {
+            Navigator.pushNamed(context, 'client/products/list');
+          });
+        } else {
+          isLoading = false;
+        }
+      });
+    } catch (e) {
+      Fluttertoast.showToast(msg: e);
       _progressDialog.close();
       isLoading = false;
-      ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
-
-      if (responseApi.success) {
-        user = await usersProvider.getById(
-            myUser.id); //obter usuario da base e guardar e, shared prefs
-        _sharedPrefs.save(
-          'user',
-          user.toJson(),
-        );
-        Fluttertoast.showToast(msg: responseApi.message);
-
-        Future.delayed(Duration(seconds: 3), () {
-          Navigator.pushNamed(context, 'client/products/list');
-        });
-      } else {
-        isLoading = false;
-      }
-    });
+      print(e);
+    }
   }
 
   void showAlertDialog() {
