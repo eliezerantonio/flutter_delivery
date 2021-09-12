@@ -27,10 +27,10 @@ class SharedPref {
     return prefs.remove(key);
   }
 
-  void logout(BuildContext context, {String idUser}) async {
+  void logout(BuildContext context, String idUser) async {
     UsersProvider usersProvider = new UsersProvider();
-    usersProvider.initState(context);
-    usersProvider.logout(idUser);
+    await usersProvider.initState(context);
+    await usersProvider.logout(idUser);
     await remove('user');
 
     Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);

@@ -14,10 +14,10 @@ class UsersProvider {
   String _api = '/api/users';
 
   BuildContext context;
-  String token;
-  Future<void> initState(BuildContext context, {String token}) async {
+  User sessionUser;
+  Future<void> initState(BuildContext context, {User sessionUser}) async {
     this.context = context;
-    this.token = token;
+    this.sessionUser = sessionUser;
   }
 
   Future<Stream> createWithImage(User user, File image) async {
@@ -66,7 +66,7 @@ class UsersProvider {
   Future<ResponseApi> logout(String idUser) async {
     try {
       Uri url = Uri.http(_url, "$_api/logout");
-      String bodyParams = json.encode({'id':idUser});
+      String bodyParams = json.encode({'id': idUser});
 
       Map<String, String> headers = {
         'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ class UsersProvider {
       if (res.statusCode == 401) {
         // nao autorizado
         Fluttertoast.showToast(msg: 'Sessao expirada');
-        new SharedPref().logout(context);
+        new SharedPref().logout(context, sessionUser.sessionToken);
       }
       final data = json.decode(res.body);
       ResponseApi responseApi = new ResponseApi.fromJson(data);
@@ -112,7 +112,7 @@ class UsersProvider {
     try {
       Uri url = Uri.http(_url, "$_api/update");
       final request = http.MultipartRequest('PUT', url);
-      request.headers['Authorization'] = token;
+      request.headers['Authorization'] = sessionUser.sessionToken;
 
       if (image != null) {
         request.files.add(http.MultipartFile('image',
@@ -126,7 +126,7 @@ class UsersProvider {
       if (response.statusCode == 401) {
         // nao autorizado
         Fluttertoast.showToast(msg: 'Sessao expirada');
-        new SharedPref().logout(context);
+        new SharedPref().logout(context, sessionUser.id);
       }
       return response.stream.transform(utf8.decoder);
     } catch (e) {
@@ -140,7 +140,7 @@ class UsersProvider {
       Uri url = Uri.http(_url, "$_api/findById/$id");
       Map<String, String> headers = {
         'Content-Type': 'application/json',
-        'Authorization': token
+        'Authorization': sessionUser.sessionToken
       };
       final res = await http.get(
         url,
@@ -150,7 +150,7 @@ class UsersProvider {
       if (res.statusCode == 401) {
         // nao autorizado
         Fluttertoast.showToast(msg: 'Sessao expirada');
-        new SharedPref().logout(context);
+        new SharedPref().logout(context, sessionUser.id);
       }
       final data = json.decode(res.body);
 

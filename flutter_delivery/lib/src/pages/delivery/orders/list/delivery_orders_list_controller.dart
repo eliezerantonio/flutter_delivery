@@ -15,7 +15,7 @@ class DeliveryOrdersListController {
   }
 
   void logout() {
-    _sharedPrefs.logout(context);
+    _sharedPrefs.logout(context, user.id);
   }
 
   void openDrawer() {
