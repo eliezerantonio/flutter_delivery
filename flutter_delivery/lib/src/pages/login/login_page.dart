@@ -111,9 +111,8 @@ class _LoginPageState extends State<LoginPage> {
       margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
       child: ElevatedButton(
         onPressed: () {
-          if (mounted) {
-            _controller.login();
-          }
+          FocusScope.of(context).unfocus();
+          _controller.login();
         },
         child: Text("Entrar"),
         style: ElevatedButton.styleFrom(
