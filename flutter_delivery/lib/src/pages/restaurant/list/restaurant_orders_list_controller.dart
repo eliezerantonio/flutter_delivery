@@ -15,6 +15,7 @@ class RestaurantOrdersListController {
   }
 
   void logout() {
+  
     _sharedPrefs.logout(context, user.id);
   }
 

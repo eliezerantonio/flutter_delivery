@@ -29,7 +29,7 @@ class SharedPref {
 
   void logout(BuildContext context, String idUser) async {
     UsersProvider usersProvider = new UsersProvider();
-    await usersProvider.initState(context);
+     usersProvider.initState(context);
     await usersProvider.logout(idUser);
     await remove('user');
 

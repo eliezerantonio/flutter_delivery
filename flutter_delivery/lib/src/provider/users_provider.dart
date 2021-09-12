@@ -64,6 +64,7 @@ class UsersProvider {
   }
 
   Future<ResponseApi> logout(String idUser) async {
+
     try {
       Uri url = Uri.http(_url, "$_api/logout");
       String bodyParams = json.encode({'id': idUser});
