@@ -45,7 +45,7 @@ class _RestaurantCategoriesPageState extends State<RestaurantCategoriesPage> {
       height: 50,
       margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: controller.createCategory,
         child: Text("Criar categoria"),
         style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
