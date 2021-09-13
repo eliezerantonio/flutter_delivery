@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_delivery/src/pages/restaurant/categories/create/restaurant_categories_create_controller.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
-class RestaurantCategoriesPage extends StatelessWidget {
+class RestaurantCategoriesPage extends StatefulWidget {
+  @override
+  _RestaurantCategoriesPageState createState() =>
+      _RestaurantCategoriesPageState();
+}
+
+class _RestaurantCategoriesPageState extends State<RestaurantCategoriesPage> {
+  RestaurantCategoriesCreateController controller =
+      RestaurantCategoriesCreateController();
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.init(context, refresh);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,5 +101,9 @@ class RestaurantCategoriesPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void refresh() {
+    setState(() {});
   }
 }
