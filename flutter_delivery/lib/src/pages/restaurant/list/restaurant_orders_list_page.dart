@@ -62,9 +62,7 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${_controller.user?.name ?? ''} ${
-                      _controller.user?.lastname
-                    }",
+                    "${_controller.user?.name ?? ''} ${_controller.user?.lastname}",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -98,9 +96,9 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
                       placeholder: _controller.user?.image != null
                           ? NetworkImage(_controller.user?.image)
                           : AssetImage("assets/img/no-image.png"),
-                      image: AssetImage(
-                        "assets/img/perfil6.jpeg",
-                      ),
+                      image: _controller.user?.image != null
+                          ? NetworkImage(_controller.user?.image)
+                          : AssetImage("assets/img/no-image.png"),
                     ),
                   ),
                 ],
@@ -108,17 +106,14 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
             ),
           ),
           ListTile(
-            title: Text("Editar Perfil"),
-            trailing: Icon(Icons.edit_outlined),
+            onTap: _controller.goToCaregoryCreate,
+            title: Text("Criar categoria"),
+            trailing: Icon(Icons.list_alt),
           ),
           ListTile(
-            title: Text("Meus Pedidos"),
-            trailing: Icon(Icons.shopping_cart_outlined),
-          ),
-         ListTile(
             onTap: _controller.goToRoles,
             title: Text("Selecionar regra"),
-            trailing: Icon(Icons.person),
+            trailing: Icon(Icons.person_outline),
           ),
           ListTile(
             onTap: _controller.logout,
