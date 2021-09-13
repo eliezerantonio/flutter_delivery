@@ -38,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   _texFieldLastPhone(),
                   _texFieldPassword(),
                   _texFieldConfirmPassword(),
-                  _buttonLogin(),
+                  _buttonCreate(),
                 ],
               ),
             ),
@@ -107,7 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buttonLogin() {
+  Widget _buttonCreate() {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
@@ -248,7 +248,7 @@ class _RegisterPageState extends State<RegisterPage> {
         controller: _controller.confirmPasswordController,
         obscureText: true,
         decoration: InputDecoration(
-          hintText: 'Confrima senha',
+          hintText: 'Confirma senha',
           border: InputBorder.none,
           hintStyle: TextStyle(color: MyColors.primaryColorDark),
           prefixIcon: Icon(
