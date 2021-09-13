@@ -1,5 +1,6 @@
-
 import 'dart:convert';
+import 'package:flutter_delivery/src/utils/shared_prefs.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/api/environment.dart';
@@ -15,7 +16,7 @@ class CategoriesProvider {
   BuildContext context;
   User sessionUser;
 
-  Future init(BuildContext context, User sessionUser) {
+  Future init(BuildContext context, User sessionUser) async {
     this.context = context;
     this.sessionUser = sessionUser;
   }
@@ -27,9 +28,15 @@ class CategoriesProvider {
 
       Map<String, String> headers = {
         'Content-Type': 'application/json',
+        'Authorization': sessionUser.sessionToken
       };
 
       final response = await http.post(url, headers: headers, body: bodyParams);
+
+      if (response.statusCode == 401) {
+        Fluttertoast.showToast(msg: 'Sessao expierada');
+        new SharedPref().logout(context, sessionUser.id);
+      }
 
       final data = json.decode(response.body);
 

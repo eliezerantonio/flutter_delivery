@@ -65,6 +65,7 @@ class _RestaurantCategoriesPageState extends State<RestaurantCategoriesPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: controller.nameController,
         decoration: InputDecoration(
           hintText: 'Nome da categoria',
           border: InputBorder.none,
@@ -87,6 +88,7 @@ class _RestaurantCategoriesPageState extends State<RestaurantCategoriesPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: controller.descriptionController,
         maxLength: 225,
         maxLines: 3,
         decoration: InputDecoration(
