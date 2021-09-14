@@ -1,9 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_delivery/src/models/category.dart';
-import 'package:flutter_delivery/src/models/response_api.dart';
+
 import 'package:flutter_delivery/src/models/user.dart';
-import 'package:flutter_delivery/src/provider/categories_provider.dart';
 import 'package:flutter_delivery/src/utils/my_snackbar.dart';
 import 'package:flutter_delivery/src/utils/shared_prefs.dart';
 
@@ -32,6 +29,5 @@ class RestaurantProductsCreateController {
       MySnackbar.show(context, 'Preencha todos campos');
       return;
     }
-   
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_delivery/src/pages/restaurant/categories/create/restaurant_categories_create_controller.dart';
+
 import 'package:flutter_delivery/src/pages/restaurant/products/create/resturant_products_create_controller.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
@@ -28,13 +28,14 @@ class _RestaurantProductsCreatePageState
       appBar: AppBar(
         title: Text("Nova producto"),
       ),
-      body: Column(
+      body: ListView(
         children: [
           SizedBox(
             height: 20,
           ),
           _textFieldName(),
-          _textFieldDescription()
+          _textFieldDescription(),
+          _textFieldPrice()
         ],
       ),
       bottomNavigationBar: _buttonCreate(),
@@ -63,17 +64,43 @@ class _RestaurantProductsCreatePageState
   Widget _textFieldName() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
+      padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        maxLength: 180,
+        maxLines: 2,
         controller: controller.nameController,
         decoration: InputDecoration(
-          hintText: 'Nome da categoria',
+          hintText: 'Nome do produto',
           border: InputBorder.none,
           hintStyle: TextStyle(color: MyColors.primaryColorDark),
           suffixIcon: Icon(
             Icons.list_alt,
+            color: MyColors.primaryColor,
+          ),
+          contentPadding: EdgeInsets.all(15),
+        ),
+      ),
+    );
+  }
+
+  Widget _textFieldPrice() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
+      decoration: BoxDecoration(
+        color: MyColors.primaryOpacityColor,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: TextField(
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          hintText: 'Nome do produto',
+          border: InputBorder.none,
+          hintStyle: TextStyle(color: MyColors.primaryColorDark),
+          suffixIcon: Icon(
+            Icons.monetization_on,
             color: MyColors.primaryColor,
           ),
           contentPadding: EdgeInsets.all(15),
@@ -94,7 +121,7 @@ class _RestaurantProductsCreatePageState
         maxLength: 225,
         maxLines: 3,
         decoration: InputDecoration(
-          hintText: 'Descricao da categoria',
+          hintText: 'Descricao do produto',
           border: InputBorder.none,
           hintStyle: TextStyle(color: MyColors.primaryColorDark),
           suffixIcon: Icon(
