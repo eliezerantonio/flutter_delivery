@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/utils/my_snackbar.dart';
 import 'package:flutter_delivery/src/utils/shared_prefs.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 class RestaurantProductsCreateController {
   BuildContext context;
@@ -10,7 +11,7 @@ class RestaurantProductsCreateController {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-
+  MoneyMaskedTextController priceController = MoneyMaskedTextController();
   // ProductsProvider _categoryProvider = new ProductsProvider();
   User user;
   SharedPref _sharedPrefs = new SharedPref();

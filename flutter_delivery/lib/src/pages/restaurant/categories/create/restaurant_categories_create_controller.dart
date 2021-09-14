@@ -5,6 +5,7 @@ import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/provider/categories_provider.dart';
 import 'package:flutter_delivery/src/utils/my_snackbar.dart';
 import 'package:flutter_delivery/src/utils/shared_prefs.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 class RestaurantCategoriesCreateController {
   BuildContext context;
@@ -12,8 +13,7 @@ class RestaurantCategoriesCreateController {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-
-  CategoriesProvider _categoryProvider = new CategoriesProvider();
+   CategoriesProvider _categoryProvider = new CategoriesProvider();
   User user;
   SharedPref _sharedPrefs = new SharedPref();
   Future init(BuildContext context, Function refresh) async {

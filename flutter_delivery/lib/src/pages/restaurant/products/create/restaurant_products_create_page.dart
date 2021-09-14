@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -35,7 +37,15 @@ class _RestaurantProductsCreatePageState
           ),
           _textFieldName(),
           _textFieldDescription(),
-          _textFieldPrice()
+          _textFieldPrice(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _cardImage(null, 1),
+              _cardImage(null, 2),
+              _cardImage(null, 3),
+            ],
+          )
         ],
       ),
       bottomNavigationBar: _buttonCreate(),
@@ -94,6 +104,7 @@ class _RestaurantProductsCreatePageState
         borderRadius: BorderRadius.circular(30),
       ),
       child: TextField(
+        controller: controller.priceController,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
           hintText: 'Nome do produto',
@@ -107,6 +118,24 @@ class _RestaurantProductsCreatePageState
         ),
       ),
     );
+  }
+
+  Widget _cardImage(File imageFile, int numberFile) {
+    return imageFile != null
+        ? Card(
+            elevation: 3,
+            child: Container(
+                height: 100,
+                width: MediaQuery.of(context).size.width * 0.26,
+                child: Image.file(imageFile, fit: BoxFit.cover)),
+          )
+        : Card(
+            elevation: 3,
+            child: Container(
+                height: 100,
+                width: MediaQuery.of(context).size.width * 0.26,
+                child: Image.asset("assets/img/no-image.png")),
+          );
   }
 
   Widget _textFieldDescription() {
