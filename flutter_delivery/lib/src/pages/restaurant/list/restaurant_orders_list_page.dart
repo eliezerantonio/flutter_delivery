@@ -111,6 +111,11 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
             trailing: Icon(Icons.list_alt),
           ),
           ListTile(
+            onTap: _controller.goToProductCreate,
+            title: Text("Criar producto"),
+            trailing: Icon(Icons.local_pizza),
+          ),
+          ListTile(
             onTap: _controller.goToRoles,
             title: Text("Selecionar regra"),
             trailing: Icon(Icons.person_outline),
