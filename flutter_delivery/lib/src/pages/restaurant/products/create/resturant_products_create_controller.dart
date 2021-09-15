@@ -1,15 +1,19 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/models/category.dart';
 import 'package:flutter_delivery/src/models/product.dart';
+import 'package:flutter_delivery/src/models/response_api.dart';
 
 import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/provider/categories_provider.dart';
+import 'package:flutter_delivery/src/provider/products_provider.dart';
 import 'package:flutter_delivery/src/utils/my_snackbar.dart';
 import 'package:flutter_delivery/src/utils/shared_prefs.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
 class RestaurantProductsCreateController {
   BuildContext context;
@@ -19,6 +23,8 @@ class RestaurantProductsCreateController {
   TextEditingController descriptionController = TextEditingController();
   MoneyMaskedTextController priceController = MoneyMaskedTextController();
   CategoriesProvider _categoryProvider = new CategoriesProvider();
+
+  ProductsProvider _productsProvider = new ProductsProvider();
 
   User user;
   List<Category> categories = [];
@@ -30,11 +36,15 @@ class RestaurantProductsCreateController {
   File imageFile2;
   File imageFile3;
 
+  ProgressDialog _progressDialog;
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
+    _progressDialog = new ProgressDialog(context: context);
+
     user = User.fromJson(await _sharedPrefs.read('user'));
     _categoryProvider.init(context, user);
+    _productsProvider.init(context, user);
     getCategories();
   }
 
@@ -62,6 +72,27 @@ class RestaurantProductsCreateController {
         price: price,
         name: name,
         idCategory: int.parse(idCategory));
+
+    List<File> images = [];
+
+    images.add(imageFile1);
+    images.add(imageFile2);
+    images.add(imageFile3);
+
+    _progressDialog.show(max: 100, msg: "Salvando...");
+    Stream stream = await _productsProvider.create(product, images);
+
+    stream.listen((response) {
+      _progressDialog.close();
+
+      ResponseApi responseApi = ResponseApi.fromJson(json.decode(response));
+
+      MySnackbar.show(context, responseApi.message);
+
+      if (responseApi.success) {
+        reseValues();
+      }
+    });
   }
 
   void getCategories() async {
@@ -110,6 +141,17 @@ class RestaurantProductsCreateController {
       }
     }
     Navigator.of(context).pop();
+    refresh();
+  }
+
+  void reseValues() {
+    nameController.text = '';
+    descriptionController.text = '0.0';
+    priceController.text = '0.0';
+    imageFile1 = null;
+    imageFile2 = null;
+    imageFile3 = null;
+    idCategory = null;
     refresh();
   }
 }
