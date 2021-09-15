@@ -39,16 +39,19 @@ class _RestaurantProductsCreatePageState
           _textFieldName(),
           _textFieldDescription(),
           _textFieldPrice(),
+          SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _cardImage(null, 1),
-              _cardImage(null, 2),
-              _cardImage(null, 3),
+              _cardImage(controller.imageFile1, 1),
+              _cardImage(controller.imageFile2, 2),
+              _cardImage(controller.imageFile3, 3),
             ],
           ),
           SizedBox(
-            height: 20,
+            height: 28,
           ),
           _dropDownCategories(controller.categories)
         ],
@@ -126,21 +129,24 @@ class _RestaurantProductsCreatePageState
   }
 
   Widget _cardImage(File imageFile, int numberFile) {
-    return imageFile != null
-        ? Card(
-            elevation: 3,
-            child: Container(
-                height: 100,
-                width: MediaQuery.of(context).size.width * 0.26,
-                child: Image.file(imageFile, fit: BoxFit.cover)),
-          )
-        : Card(
-            elevation: 3,
-            child: Container(
-                height: 100,
-                width: MediaQuery.of(context).size.width * 0.26,
-                child: Image.asset("assets/img/no-image.png")),
-          );
+    return GestureDetector(
+      onTap: () => controller.showAlertDialog(numberFile),
+      child: imageFile != null
+          ? Card(
+              elevation: 3,
+              child: Container(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width * 0.26,
+                  child: Image.file(imageFile, fit: BoxFit.cover)),
+            )
+          : Card(
+              elevation: 3,
+              child: Container(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width * 0.26,
+                  child: Image.asset("assets/img/no-image.png")),
+            ),
+    );
   }
 
   Widget _textFieldDescription() {
