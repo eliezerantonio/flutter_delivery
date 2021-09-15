@@ -67,10 +67,13 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
               builder: (context, AsyncSnapshot<List<Product>> snapshot) {
                 return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 0.8,),
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.8,
+                  ),
                   itemCount: snapshot?.data?.length ?? 0,
                   itemBuilder: (_, index) {
-                    return _cardProduct();
+                    Product product = snapshot?.data[index];
+                    return _cardProduct(product);
                   },
                 );
               },
@@ -81,7 +84,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
     );
   }
 
-  Widget _cardProduct() {
+  Widget _cardProduct(Product product) {
     return Container(
       height: 230,
       child: Card(
@@ -115,9 +118,9 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                   padding: EdgeInsets.all(20),
                   width: MediaQuery.of(context).size.width * 0.45,
                   child: FadeInImage(
-                    image: AssetImage(
-                      "assets/img/pizza2.png",
-                    ),
+                    image: product.image1!=null? AssetImage(
+                      product.image1,
+                    ): AssetImage("assets/img/no-image.png"),
                     fit: BoxFit.contain,
                     placeholder: AssetImage("assets/img/no-image.png"),
                     fadeInDuration: Duration(seconds: 3),
@@ -127,7 +130,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   height: 33,
                   child: Text(
-                    "Nome do produto",
+                    product.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -140,7 +143,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "5.000,00",
+                    "${product.price}",
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
