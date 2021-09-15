@@ -4,6 +4,7 @@ import 'package:flutter_delivery/src/models/category.dart';
 import 'package:flutter_delivery/src/models/product.dart';
 import 'package:flutter_delivery/src/pages/client/products/list/client_products_list_controller.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
+import 'package:flutter_delivery/src/widgets/no_data_widget.dart';
 
 class ClientProductsListPage extends StatefulWidget {
   ClientProductsListPage({Key key}) : super(key: key);
@@ -65,17 +66,31 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
             return FutureBuilder(
               future: _controller.getProducts(category.id),
               builder: (context, AsyncSnapshot<List<Product>> snapshot) {
-                return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.8,
-                  ),
-                  itemCount: snapshot?.data?.length ?? 0,
-                  itemBuilder: (_, index) {
-                    Product product = snapshot?.data[index];
-                    return _cardProduct(product);
-                  },
-                );
+                if (snapshot.hasData) {
+                  if (snapshot.data.length > 0) {
+                    return GridView.builder(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.8,
+                      ),
+                      itemCount: snapshot?.data?.length ?? 0,
+                      itemBuilder: (_, index) {
+                        Product product = snapshot?.data[index];
+                        return _cardProduct(product);
+                      },
+                    );
+                  } else {
+                    return NoDataWidget(
+                      text: "Não há produtos",
+                    );
+                  }
+                } else {
+                  return NoDataWidget(
+                    text: "Não há produtos",
+                  );
+                }
               },
             );
           }).toList(),
@@ -118,9 +133,11 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                   padding: EdgeInsets.all(20),
                   width: MediaQuery.of(context).size.width * 0.45,
                   child: FadeInImage(
-                    image: product.image1!=null? AssetImage(
-                      product.image1,
-                    ): AssetImage("assets/img/no-image.png"),
+                    image: product.image1 != null
+                        ? NetworkImage(
+                            product.image1,
+                          )
+                        : AssetImage("assets/img/no-image.png"),
                     fit: BoxFit.contain,
                     placeholder: AssetImage("assets/img/no-image.png"),
                     fadeInDuration: Duration(seconds: 3),
@@ -130,7 +147,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   height: 33,
                   child: Text(
-                    product.name,
+                    product.name ?? "",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -143,7 +160,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "${product.price}",
+                    "${product.price ?? "0.0"}",
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
