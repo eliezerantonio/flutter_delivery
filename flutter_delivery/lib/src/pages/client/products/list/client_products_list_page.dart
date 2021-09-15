@@ -61,7 +61,12 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
         ),
         body: TabBarView(
           children: _controller.categories.map((Category category) {
-            return _cardProduct();
+            return GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: 0.9,
+                children: List.generate(10, (index) {
+                  return _cardProduct();
+                }));
           }).toList(),
         ),
       ),
@@ -70,7 +75,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
 
   Widget _cardProduct() {
     return Container(
-      height: 200,
+      height: 230,
       child: Card(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -79,7 +84,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
         child: Stack(
           children: [
             Positioned(
-              top: -1,
+              bottom: -1,
               right: -1,
               child: Container(
                   width: 40,
@@ -88,6 +93,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                     color: MyColors.primaryColor,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
                       topRight: Radius.circular(20),
                     ),
                   ),
@@ -97,7 +103,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 150,
+                  height: 130,
                   padding: EdgeInsets.all(20),
                   width: MediaQuery.of(context).size.width * 0.45,
                   child: FadeInImage(
@@ -111,8 +117,11 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
+                  height: 33,
                   child: Text(
                     "Nome do produto",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 15,
                       fontFamily: "NimbusSans",
