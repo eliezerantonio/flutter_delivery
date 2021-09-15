@@ -32,10 +32,10 @@ class MyApp extends StatelessWidget {
         'client/update': (_) => ClientUpdatePage(),
       },
       theme: ThemeData(
-        // fontFamily: 'NimbusSans',
-        primaryColor: MyColors.primaryColor,
-        scaffoldBackgroundColor: Colors.white,
-      ),
+          // fontFamily: 'NimbusSans',
+          primaryColor: MyColors.primaryColor,
+          // scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(elevation: 0)),
     );
   }
 }
