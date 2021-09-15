@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/models/category.dart';
+import 'package:flutter_delivery/src/models/product.dart';
 
 import 'package:flutter_delivery/src/models/user.dart';
 import 'package:flutter_delivery/src/provider/categories_provider.dart';
@@ -55,6 +56,12 @@ class RestaurantProductsCreateController {
       MySnackbar.show(context, 'Selecione a categoria');
       return;
     }
+
+    Product product = new Product(
+        description: description,
+        price: price,
+        name: name,
+        idCategory: int.parse(idCategory));
   }
 
   void getCategories() async {
