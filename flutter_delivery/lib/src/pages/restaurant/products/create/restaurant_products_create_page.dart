@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_delivery/src/models/category.dart';
 
 import 'package:flutter_delivery/src/pages/restaurant/products/create/resturant_products_create_controller.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
@@ -45,7 +46,11 @@ class _RestaurantProductsCreatePageState
               _cardImage(null, 2),
               _cardImage(null, 3),
             ],
-          )
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          _dropDownCategories([])
         ],
       ),
       bottomNavigationBar: _buttonCreate(),
@@ -56,7 +61,7 @@ class _RestaurantProductsCreatePageState
     return Container(
       width: double.infinity,
       height: 50,
-      margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
+      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       child: ElevatedButton(
         onPressed: controller.createProduct,
         child: Text("Criar produto"),
@@ -73,7 +78,7 @@ class _RestaurantProductsCreatePageState
 
   Widget _textFieldName() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
+      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 7),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
@@ -98,7 +103,7 @@ class _RestaurantProductsCreatePageState
 
   Widget _textFieldPrice() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
+      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 7),
       decoration: BoxDecoration(
         color: MyColors.primaryOpacityColor,
         borderRadius: BorderRadius.circular(30),
@@ -140,7 +145,7 @@ class _RestaurantProductsCreatePageState
 
   Widget _textFieldDescription() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 7),
+      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 7),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
@@ -158,6 +163,67 @@ class _RestaurantProductsCreatePageState
             color: MyColors.primaryColor,
           ),
           contentPadding: EdgeInsets.all(25),
+        ),
+      ),
+    );
+  }
+
+  Widget _dropDownCategories(List<Category> categories) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: 30,
+      ),
+      child: Material(
+        elevation: 2,
+        color: Colors.white,
+        borderRadius: BorderRadius.all(
+          Radius.circular(5),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.search,
+                    color: MyColors.primaryColor,
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    "Categorias",
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: DropdownButton(
+                  underline: Container(
+                    alignment: Alignment.centerRight,
+                    child: Icon(
+                      Icons.arrow_drop_down_circle,
+                      color: MyColors.primaryColor,
+                    ),
+                  ),
+                  elevation: 3,
+                  isExpanded: true,
+                  hint: Text(
+                    "Selecionar categoria",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                    ),
+                  ),
+                  items: [],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
