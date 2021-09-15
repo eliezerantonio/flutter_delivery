@@ -50,7 +50,7 @@ class _RestaurantProductsCreatePageState
           SizedBox(
             height: 20,
           ),
-          _dropDownCategories([])
+          _dropDownCategories(controller.categories)
         ],
       ),
       bottomNavigationBar: _buttonCreate(),
@@ -203,30 +203,46 @@ class _RestaurantProductsCreatePageState
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: DropdownButton(
-                  underline: Container(
-                    alignment: Alignment.centerRight,
-                    child: Icon(
-                      Icons.arrow_drop_down_circle,
-                      color: MyColors.primaryColor,
+                    underline: Container(
+                      alignment: Alignment.centerRight,
+                      child: Icon(
+                        Icons.arrow_drop_down_circle,
+                        color: MyColors.primaryColor,
+                      ),
                     ),
-                  ),
-                  elevation: 3,
-                  isExpanded: true,
-                  hint: Text(
-                    "Selecionar categoria",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
+                    elevation: 3,
+                    isExpanded: true,
+                    hint: Text(
+                      "Selecionar categoria",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  items: [],
-                ),
+                    items: _dropDownItems(categories),
+                    value: controller.idCategory,
+                    onChanged: (option) {
+                      setState(() {
+                        controller.idCategory = option;
+                      });
+                    }),
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  List<DropdownMenuItem<String>> _dropDownItems(List<Category> categories) {
+    List<DropdownMenuItem<String>> list = [];
+
+    categories.forEach((category) {
+      list.add(
+          DropdownMenuItem(child: Text(category.name), value: category.id));
+    });
+
+    return list;
   }
 
   void refresh() {
