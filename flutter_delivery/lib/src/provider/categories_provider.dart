@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_delivery/src/models/product.dart';
 import 'package:flutter_delivery/src/utils/shared_prefs.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -49,8 +50,6 @@ class CategoriesProvider {
       return [];
     }
   }
-
-  
 
   Future<ResponseApi> create(Category category) async {
     try {

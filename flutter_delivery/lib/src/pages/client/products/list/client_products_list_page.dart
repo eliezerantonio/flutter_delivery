@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_delivery/src/models/category.dart';
+import 'package:flutter_delivery/src/models/product.dart';
 import 'package:flutter_delivery/src/pages/client/products/list/client_products_list_controller.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
@@ -61,12 +62,19 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
         ),
         body: TabBarView(
           children: _controller.categories.map((Category category) {
-            return GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio: 0.9,
-                children: List.generate(10, (index) {
-                  return _cardProduct();
-                }));
+            return FutureBuilder(
+              future: _controller.getProducts(category.id),
+              builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, childAspectRatio: 0.8,),
+                  itemCount: snapshot?.data?.length ?? 0,
+                  itemBuilder: (_, index) {
+                    return _cardProduct();
+                  },
+                );
+              },
+            );
           }).toList(),
         ),
       ),
