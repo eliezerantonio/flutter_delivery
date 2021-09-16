@@ -178,7 +178,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.all(20),
+          margin: EdgeInsets.all(10),
           child: ImageSlideshow(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.4,
@@ -192,7 +192,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
                         widget.product?.image1,
                       )
                     : AssetImage("assets/img/no-image.png"),
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 placeholder: AssetImage("assets/img/no-image.png"),
                 fadeInDuration: Duration(seconds: 3),
               ),
@@ -202,7 +202,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
                         widget.product?.image2,
                       )
                     : AssetImage("assets/img/no-image.png"),
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 placeholder: AssetImage("assets/img/no-image.png"),
                 fadeInDuration: Duration(seconds: 3),
               ),
@@ -212,7 +212,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
                         widget.product?.image3,
                       )
                     : AssetImage("assets/img/no-image.png"),
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 placeholder: AssetImage("assets/img/no-image.png"),
                 fadeInDuration: Duration(seconds: 3),
               )
@@ -228,7 +228,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
           top: 5,
           child: IconButton(
             splashColor: Colors.transparent,
-            onPressed: () {},
+            onPressed: _controller.close,
             icon: Icon(Icons.arrow_back_ios, color: MyColors.primaryColor),
           ),
         )

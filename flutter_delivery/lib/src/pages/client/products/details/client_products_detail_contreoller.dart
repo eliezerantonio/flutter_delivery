@@ -46,6 +46,10 @@ class ClientProductsDetailController {
     }
   }
 
+  void close() {
+    Navigator.pop(context);
+  }
+
   void addToBag() {
     int index = selectedProducts.indexWhere((p) => p.id == product.id);
 
@@ -57,9 +61,9 @@ class ClientProductsDetailController {
       }
 
       selectedProducts.add(product);
-    } else {//se ja existe aumenta apenas  qtd
+    } else {
+      //se ja existe aumenta apenas  qtd
       selectedProducts[index].quantity = counter;
-
     }
     _sharedPref.save("order", selectedProducts);
     Fluttertoast.showToast(msg: "Produto adicionado");
