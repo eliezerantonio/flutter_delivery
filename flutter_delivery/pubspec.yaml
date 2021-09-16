@@ -28,6 +28,7 @@ dependencies:
   fluttertoast: ^8.0.8
   http: ^0.13.3
   image_picker: ^0.8.4
+  modal_bottom_sheet: ^2.0.0
   shared_preferences: ^2.0.7
   sn_progress_dialog: ^1.0.3
 

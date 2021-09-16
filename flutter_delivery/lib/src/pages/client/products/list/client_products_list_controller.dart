@@ -6,6 +6,7 @@ import 'package:flutter_delivery/src/provider/categories_provider.dart';
 import 'package:flutter_delivery/src/provider/products_provider.dart';
 import 'package:flutter_delivery/src/utils/shared_prefs.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ClientProductsListController {
   BuildContext context;
@@ -46,6 +47,15 @@ class ClientProductsListController {
       'client/update',
     );
   }
+
+  void openBottomSheet{
+
+    
+    showMaterialModalBottomSheet(context: context, builder: builder);
+    
+    
+    
+      }
 
   Future<List<Product>> getProducts(String idCategory) async {
     return await _productsProvider.getByCategory(idCategory);
