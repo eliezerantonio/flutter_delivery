@@ -76,7 +76,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
       child: Row(
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: _controller.addItem,
             icon: Icon(
               Icons.add_circle_outline,
               color: Colors.grey,
@@ -84,7 +84,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
             ),
           ),
           Text(
-            "1",
+            "${_controller.counter}",
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.bold,
@@ -92,7 +92,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: _controller.removeItem,
             icon: Icon(
               Icons.remove_circle_outline,
               color: Colors.grey,
@@ -103,7 +103,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
           Container(
             margin: EdgeInsets.only(right: 10),
             child: Text(
-              "${_controller.product?.price ?? 0} KZ",
+              "${_controller.productPrice ?? 0} KZ",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -136,7 +136,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: _controller.addToBag,
         style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
           padding: EdgeInsets.symmetric(vertical: 5),
