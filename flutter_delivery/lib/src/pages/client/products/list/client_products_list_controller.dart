@@ -60,15 +60,16 @@ class ClientProductsListController {
 
   void openBottomSheet(Product product) {
     showMaterialModalBottomSheet(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
         ),
-        context: context,
-        builder: (context) => ClientProductsDetailPage(
-              product: product,
-            ));
+      ),
+      context: context,
+      builder: (context) => ClientProductsDetailPage(
+        product: product,
+      ),
+    );
   }
 }

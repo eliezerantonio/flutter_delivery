@@ -34,8 +34,17 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
             height: 20,
           ),
           _imageSlideShow(),
+          _textName()
         ],
       ),
+    );
+  }
+
+  Widget _textName() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: Text(_controller.product?.name ?? " ",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
     );
   }
 
@@ -50,9 +59,9 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
         indicatorBackgroundColor: Colors.grey,
         children: [
           FadeInImage(
-            image: widget.product.image1 != null
+            image: widget.product?.image1 != null
                 ? NetworkImage(
-                    widget.product.image1,
+                    widget.product?.image1,
                   )
                 : AssetImage("assets/img/no-image.png"),
             fit: BoxFit.contain,
@@ -60,9 +69,9 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
             fadeInDuration: Duration(seconds: 3),
           ),
           FadeInImage(
-            image: widget.product.image2 != null
+            image: widget.product?.image2 != null
                 ? NetworkImage(
-                    widget.product.image2,
+                    widget.product?.image2,
                   )
                 : AssetImage("assets/img/no-image.png"),
             fit: BoxFit.contain,
@@ -70,9 +79,9 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
             fadeInDuration: Duration(seconds: 3),
           ),
           FadeInImage(
-            image: widget.product.image3 != null
+            image: widget.product?.image3 != null
                 ? NetworkImage(
-                    widget.product.image3,
+                    widget.product?.image3,
                   )
                 : AssetImage("assets/img/no-image.png"),
             fit: BoxFit.contain,
