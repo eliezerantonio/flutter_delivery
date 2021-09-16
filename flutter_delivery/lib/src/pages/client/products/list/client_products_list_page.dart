@@ -101,7 +101,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
 
   Widget _cardProduct(Product product) {
     return GestureDetector(
-      onTap: _controller.openBottomSheet,
+      onTap:()=> _controller.openBottomSheet(product),
       child: Container(
         height: 230,
         child: Card(

@@ -24,6 +24,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_image_slideshow: ^0.1.1
   flutter_masked_text: ^0.8.0
   fluttertoast: ^8.0.8
   http: ^0.13.3

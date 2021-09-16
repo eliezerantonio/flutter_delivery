@@ -58,8 +58,17 @@ class ClientProductsListController {
     refresh();
   }
 
-  void openBottomSheet() {
+  void openBottomSheet(Product product) {
     showMaterialModalBottomSheet(
-        context: context, builder: (context) => ClientProductsDetailPage());
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        context: context,
+        builder: (context) => ClientProductsDetailPage(
+              product: product,
+            ));
   }
 }
