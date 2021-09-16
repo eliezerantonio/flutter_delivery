@@ -100,77 +100,80 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
   }
 
   Widget _cardProduct(Product product) {
-    return Container(
-      height: 230,
-      child: Card(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusDirectional.circular(15),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: -1,
-              right: -1,
-              child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: MyColors.primaryColor,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                      topRight: Radius.circular(20),
+    return GestureDetector(
+      onTap: _controller.openBottomSheet,
+      child: Container(
+        height: 230,
+        child: Card(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusDirectional.circular(15),
+          ),
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: -1,
+                right: -1,
+                child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: MyColors.primaryColor,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Icon(Icons.add, color: Colors.white)),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 130,
+                    padding: EdgeInsets.all(20),
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    child: FadeInImage(
+                      image: product.image1 != null
+                          ? NetworkImage(
+                              product.image1,
+                            )
+                          : AssetImage("assets/img/no-image.png"),
+                      fit: BoxFit.contain,
+                      placeholder: AssetImage("assets/img/no-image.png"),
+                      fadeInDuration: Duration(seconds: 3),
                     ),
                   ),
-                  child: Icon(Icons.add, color: Colors.white)),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 130,
-                  padding: EdgeInsets.all(20),
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  child: FadeInImage(
-                    image: product.image1 != null
-                        ? NetworkImage(
-                            product.image1,
-                          )
-                        : AssetImage("assets/img/no-image.png"),
-                    fit: BoxFit.contain,
-                    placeholder: AssetImage("assets/img/no-image.png"),
-                    fadeInDuration: Duration(seconds: 3),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  height: 33,
-                  child: Text(
-                    product.name ?? "",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontFamily: "NimbusSans",
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    height: 33,
+                    child: Text(
+                      product.name ?? "",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: "NimbusSans",
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(
-                    "${product.price ?? "0.0"}",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "NimbusSans",
+                  SizedBox(height: 10),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      "${product.price ?? "0.0"}",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "NimbusSans",
+                      ),
                     ),
                   ),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

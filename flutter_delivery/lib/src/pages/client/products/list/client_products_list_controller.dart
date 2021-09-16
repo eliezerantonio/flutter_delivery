@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_delivery/src/models/category.dart';
 import 'package:flutter_delivery/src/models/product.dart';
 import 'package:flutter_delivery/src/models/user.dart';
+import 'package:flutter_delivery/src/pages/client/products/details/client_products_detail.page.dart';
 import 'package:flutter_delivery/src/provider/categories_provider.dart';
 import 'package:flutter_delivery/src/provider/products_provider.dart';
 import 'package:flutter_delivery/src/utils/shared_prefs.dart';
@@ -48,15 +49,6 @@ class ClientProductsListController {
     );
   }
 
-  void openBottomSheet{
-
-    
-    showMaterialModalBottomSheet(context: context, builder: builder);
-    
-    
-    
-      }
-
   Future<List<Product>> getProducts(String idCategory) async {
     return await _productsProvider.getByCategory(idCategory);
   }
@@ -64,5 +56,10 @@ class ClientProductsListController {
   void getCategories(Function refresh) async {
     categories = await _categoryProvider.getAll();
     refresh();
+  }
+
+  void openBottomSheet() {
+    showMaterialModalBottomSheet(
+        context: context, builder: (context) => ClientProductsDetailPage());
   }
 }
