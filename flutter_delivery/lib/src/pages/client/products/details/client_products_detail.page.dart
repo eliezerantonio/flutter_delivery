@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_delivery/src/models/product.dart';
 import 'package:flutter_delivery/src/pages/client/products/details/client_products_detail_contreoller.dart';
+import 'package:flutter_delivery/src/utils/my_colors.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class ClientProductsDetailPage extends StatefulWidget {
@@ -34,7 +35,13 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
             height: 20,
           ),
           _imageSlideShow(),
-          _textName()
+          _textName(),
+          SizedBox(height: 7),
+          _textDescription(),
+          Spacer(),
+          _addOrRemoveItem(),
+          _standartDelivery(),
+          _buttonShopingBag()
         ],
       ),
     );
@@ -43,57 +50,189 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
   Widget _textName() {
     return Container(
       alignment: Alignment.centerLeft,
+      margin: EdgeInsets.symmetric(horizontal: 30),
       child: Text(_controller.product?.name ?? " ",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
     );
   }
 
-  Widget _imageSlideShow() {
+  Widget _textDescription() {
     return Container(
-      margin: EdgeInsets.all(20),
-      child: ImageSlideshow(
-        width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.4,
-        initialPage: 0,
-        indicatorColor: Colors.red,
-        indicatorBackgroundColor: Colors.grey,
+      alignment: Alignment.centerLeft,
+      margin: EdgeInsets.symmetric(horizontal: 30),
+      child: Text(
+        _controller.product?.description ?? " ",
+        style: TextStyle(
+          fontSize: 15,
+          color: Colors.grey,
+        ),
+      ),
+    );
+  }
+
+  Widget _addOrRemoveItem() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 17),
+      child: Row(
         children: [
-          FadeInImage(
-            image: widget.product?.image1 != null
-                ? NetworkImage(
-                    widget.product?.image1,
-                  )
-                : AssetImage("assets/img/no-image.png"),
-            fit: BoxFit.contain,
-            placeholder: AssetImage("assets/img/no-image.png"),
-            fadeInDuration: Duration(seconds: 3),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.add_circle_outline,
+              color: Colors.grey,
+              size: 30,
+            ),
           ),
-          FadeInImage(
-            image: widget.product?.image2 != null
-                ? NetworkImage(
-                    widget.product?.image2,
-                  )
-                : AssetImage("assets/img/no-image.png"),
-            fit: BoxFit.contain,
-            placeholder: AssetImage("assets/img/no-image.png"),
-            fadeInDuration: Duration(seconds: 3),
+          Text(
+            "1",
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
+            ),
           ),
-          FadeInImage(
-            image: widget.product?.image3 != null
-                ? NetworkImage(
-                    widget.product?.image3,
-                  )
-                : AssetImage("assets/img/no-image.png"),
-            fit: BoxFit.contain,
-            placeholder: AssetImage("assets/img/no-image.png"),
-            fadeInDuration: Duration(seconds: 3),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.remove_circle_outline,
+              color: Colors.grey,
+              size: 30,
+            ),
+          ),
+          Spacer(),
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            child: Text(
+              "${_controller.product?.price ?? 0} KZ",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           )
         ],
-        onPageChanged: (value) {
-          print('Page changed: $value');
-        },
-        autoPlayInterval: 3000,
       ),
+    );
+  }
+
+  Widget _standartDelivery() {
+    return Container(
+        margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        child: Row(
+          children: [
+            Image.asset(
+              "assets/img/delivery.png",
+              height: 30,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text("Frete padrão", style: TextStyle(color: Colors.green))
+          ],
+        ));
+  }
+
+  Widget _buttonShopingBag() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          primary: MyColors.primaryColor,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                height: 44,
+                alignment: Alignment.center,
+                child: Text("Adicionar ao carrinho",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                margin: EdgeInsets.only(left: 70, top: 7),
+                child: Image.asset(
+                  "assets/img/bag.png",
+                  height: 30,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _imageSlideShow() {
+    return Stack(
+      children: [
+        Container(
+          margin: EdgeInsets.all(20),
+          child: ImageSlideshow(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.4,
+            initialPage: 0,
+            indicatorColor: Colors.red,
+            indicatorBackgroundColor: Colors.grey,
+            children: [
+              FadeInImage(
+                image: widget.product?.image1 != null
+                    ? NetworkImage(
+                        widget.product?.image1,
+                      )
+                    : AssetImage("assets/img/no-image.png"),
+                fit: BoxFit.contain,
+                placeholder: AssetImage("assets/img/no-image.png"),
+                fadeInDuration: Duration(seconds: 3),
+              ),
+              FadeInImage(
+                image: widget.product?.image2 != null
+                    ? NetworkImage(
+                        widget.product?.image2,
+                      )
+                    : AssetImage("assets/img/no-image.png"),
+                fit: BoxFit.contain,
+                placeholder: AssetImage("assets/img/no-image.png"),
+                fadeInDuration: Duration(seconds: 3),
+              ),
+              FadeInImage(
+                image: widget.product?.image3 != null
+                    ? NetworkImage(
+                        widget.product?.image3,
+                      )
+                    : AssetImage("assets/img/no-image.png"),
+                fit: BoxFit.contain,
+                placeholder: AssetImage("assets/img/no-image.png"),
+                fadeInDuration: Duration(seconds: 3),
+              )
+            ],
+            onPageChanged: (value) {
+              print('Page changed: $value');
+            },
+            autoPlayInterval: 3000,
+          ),
+        ),
+        Positioned(
+          left: 10,
+          top: 5,
+          child: IconButton(
+            splashColor: Colors.transparent,
+            onPressed: () {},
+            icon: Icon(Icons.arrow_back_ios, color: MyColors.primaryColor),
+          ),
+        )
+      ],
     );
   }
 
