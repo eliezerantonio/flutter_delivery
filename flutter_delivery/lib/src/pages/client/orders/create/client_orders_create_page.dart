@@ -98,7 +98,7 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
           ),
           Spacer(),
           Text(
-            "0.0KZ",
+            "${_con.total}",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -186,16 +186,19 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
   Row _addOrRemoveItem(Product product) {
     return Row(
       children: [
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(8),
-              bottomLeft: Radius.circular(8),
+        GestureDetector(
+          onTap: () => _con.addItem(product),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
+              ),
+              color: Colors.grey[200],
             ),
-            color: Colors.grey[200],
+            child: Text("-"),
           ),
-          child: Text("-"),
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 7),
@@ -204,16 +207,19 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
             '${product?.quantity ?? 0}',
           ),
         ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(8),
-              bottomRight: Radius.circular(8),
+        GestureDetector(
+          onTap: () => _con.removeItem(product),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+              ),
+              color: Colors.grey[200],
             ),
-            color: Colors.grey[200],
+            child: Text("+"),
           ),
-          child: Text("+"),
         ),
       ],
     );
@@ -222,9 +228,10 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
   void refresh() {
     setState(() {});
   }
-}
 
-Widget _buttonDelete(Product product) {
-  return IconButton(
-      onPressed: () {}, icon: Icon(Icons.delete, color: MyColors.primaryColor));
+  Widget _buttonDelete(Product product) {
+    return IconButton(
+        onPressed: () => _con.deleteItem(product),
+        icon: Icon(Icons.delete, color: MyColors.primaryColor));
+  }
 }
