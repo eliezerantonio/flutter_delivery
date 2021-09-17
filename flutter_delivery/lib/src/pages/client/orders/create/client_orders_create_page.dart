@@ -37,6 +37,19 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
           : NoDataWidget(
               text: "Sem produtos no carrinho",
             ),
+      bottomNavigationBar: Container(
+          height: MediaQuery.of(context).size.height * 0.29,
+          child: Column(
+            children: [
+              Divider(
+                color: Colors.grey[400],
+                endIndent: 30,
+                indent: 30,
+              ),
+              _textTotalPrice(),
+              _buttonShopingBag()
+            ],
+          )),
     );
   }
 
@@ -71,12 +84,78 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
     );
   }
 
+  Widget _textTotalPrice() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Row(
+        children: [
+          Text(
+            "Total",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
+            ),
+          ),
+          Spacer(),
+          Text(
+            "0.0KZ",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buttonShopingBag() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          primary: MyColors.primaryColor,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                height: 40,
+                alignment: Alignment.center,
+                child: Text("Continuar",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                margin: EdgeInsets.only(left: 80, top: 7),
+                child: Icon(Icons.check_circle, color: Colors.green, size: 30),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   Container _textPrice(Product product) {
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: Text(
         "${product.price * product.price}",
-        style: TextStyle(color: Colors.grey),
+        style: TextStyle(
+          color: Colors.grey,
+        ),
       ),
     );
   }
