@@ -301,9 +301,9 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                       placeholder: _controller.user?.image != null
                           ? NetworkImage(_controller.user?.image)
                           : AssetImage("assets/img/no-image.png"),
-                      image: AssetImage(
-                        "assets/img/no-image.png",
-                      ),
+                      image:  _controller.user?.image != null
+                          ? NetworkImage(_controller.user?.image)
+                          : AssetImage("assets/img/no-image.png"),
                     ),
                   ),
                 ],
