@@ -8,4 +8,8 @@ class ClientAddressListController {
     this.context = context;
     this.refresh = refresh;
   }
+
+  void goToNewAddress() {
+    Navigator.pushNamed(context, 'client/address/create');
+  }
 }

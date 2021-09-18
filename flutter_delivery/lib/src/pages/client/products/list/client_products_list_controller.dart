@@ -64,6 +64,7 @@ class ClientProductsListController {
 
   void openBottomSheet(Product product) {
     showMaterialModalBottomSheet(
+      animationCurve: Curves.easeInOut,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),

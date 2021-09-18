@@ -7,7 +7,8 @@ class ClientAddressCreatePage extends StatefulWidget {
   ClientAddressCreatePage({Key key}) : super(key: key);
 
   @override
-  _ClientAddressCreatePageState createState() => _ClientAddressCreatePageState();
+  _ClientAddressCreatePageState createState() =>
+      _ClientAddressCreatePageState();
 }
 
 class _ClientAddressCreatePageState extends State<ClientAddressCreatePage> {
@@ -25,15 +26,12 @@ class _ClientAddressCreatePageState extends State<ClientAddressCreatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nova direcao"),
+        title: Text("Nova Endereco"),
       ),
     );
   }
 
-
-  void refresh(){
-    setState(() {
-      
-    });
+  void refresh() {
+    setState(() {});
   }
 }

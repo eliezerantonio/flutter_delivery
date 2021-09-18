@@ -34,8 +34,10 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
                 return _cardProduct(product);
               }).toList(),
             )
-          : NoDataWidget(
-              text: "Sem produtos no carrinho",
+          : Center(
+              child: NoDataWidget(
+                text: "Sem produtos no carrinho",
+              ),
             ),
       bottomNavigationBar: Container(
           height: MediaQuery.of(context).size.height * 0.29,
@@ -113,7 +115,7 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: _con.goToAddress,
         style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
           padding: EdgeInsets.symmetric(vertical: 5),
@@ -231,7 +233,8 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
 
   Widget _buttonDelete(Product product) {
     return IconButton(
-        onPressed: () => _con.deleteItem(product),
-        icon: Icon(Icons.delete, color: MyColors.primaryColor));
+      onPressed: () => _con.deleteItem(product),
+      icon: Icon(Icons.delete, color: MyColors.primaryColor),
+    );
   }
 }
