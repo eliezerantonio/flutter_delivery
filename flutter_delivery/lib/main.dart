@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           // fontFamily: 'NimbusSans',
           primaryColor: MyColors.primaryColor,
-          // scaffoldBackgroundColor: Colors.white,
+          scaffoldBackgroundColor: Colors.white,
           appBarTheme: AppBarTheme(elevation: 0)),
     );
   }

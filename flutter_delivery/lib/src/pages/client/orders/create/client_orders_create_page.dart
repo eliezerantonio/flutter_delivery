@@ -98,7 +98,7 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
           ),
           Spacer(),
           Text(
-            "${_con.total}",
+            "${_con.total.toStringAsFixed(2)}",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -152,7 +152,7 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: Text(
-        "${product.price * product.price}",
+        "${(product.price * product.price).toStringAsFixed(2)}",
         style: TextStyle(
           color: Colors.grey,
         ),
