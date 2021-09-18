@@ -27,10 +27,11 @@ dependencies:
   flutter_image_slideshow: ^0.1.1
   flutter_masked_text: ^0.8.0
   fluttertoast: ^8.0.8
+  google_maps_flutter: ^2.0.9
   http: ^0.13.3
   image_picker: ^0.8.4
   modal_bottom_sheet: ^2.0.0
-  shared_preferences: ^2.0.7
+  shared_preferences: ^2.0.6
   sn_progress_dialog: ^1.0.3
 
 dev_dependencies:

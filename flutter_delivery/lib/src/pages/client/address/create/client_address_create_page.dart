@@ -29,8 +29,8 @@ class _ClientAddressCreatePageState extends State<ClientAddressCreatePage> {
       appBar: AppBar(
         title: Text("Nova Endereco"),
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Container(
+        child: Column( 
           children: [
             _textCompleteData(),
             _textFieldAddess(),
@@ -96,6 +96,7 @@ class _ClientAddressCreatePageState extends State<ClientAddressCreatePage> {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: TextField(
+          onTap: _con.openMap,
           autofocus: false,
           focusNode: AlwaysDisabledFocusNode(),
           decoration: InputDecoration(
