@@ -69,7 +69,7 @@ class _ClientAddressListPageState extends State<ClientAddressListPage> {
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       height: 44,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: _con.goToNewAddress,
         style: ElevatedButton.styleFrom(
           shape: StadiumBorder(),
           primary: MyColors.primaryColor,
