@@ -10,6 +10,7 @@ import 'package:flutter_delivery/src/pages/roles/roles_page.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 
 import 'src/pages/client/address/list/client_address_list_page.dart';
+import 'src/pages/client/address/map/client_address_map_page.dart';
 import 'src/pages/client/update/client_update_page.dart';
 import 'src/pages/login/login_page.dart';
 import 'src/pages/register/register_page.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         'client/orders/create': (_) => ClientOrdersCreatePage(),
         'client/address/create': (_) => ClientAddressCreatePage(),
         'client/address/list': (_) => ClientAddressListPage(),
+        'client/address/map': (_) => ClientAddressMapPage(),
         'restaurant/orders/list': (_) => RestaunrantOrdersListPage(),
         'restaurant/categories/create': (_) => RestaurantCategoriesPage(),
         'restaurant/products/create': (_) => RestaurantProductsCreatePage(),
