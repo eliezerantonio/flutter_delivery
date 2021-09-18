@@ -63,7 +63,8 @@ class ClientProductsDetailController {
       selectedProducts.add(product);
     } else {
       //se ja existe aumenta apenas  qtd
-      selectedProducts[index].quantity = counter;
+      selectedProducts[index].quantity =
+          selectedProducts[index].quantity + counter;
     }
     _sharedPref.save("order", selectedProducts);
     Fluttertoast.showToast(msg: "Produto adicionado");

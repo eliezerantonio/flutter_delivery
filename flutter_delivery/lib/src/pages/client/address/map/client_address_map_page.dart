@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_delivery/src/utils/my_colors.dart';
 import 'package:flutter_delivery/src/widgets/no_data_widget.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'client_address_map_controller.dart';
 
@@ -24,10 +27,19 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Selecione a sua localizacao22"),
-        
-      ),
+        appBar: AppBar(
+          title: Text("Selecione a sua localizacao22"),
+        ),
+        body: Stack(
+          children: [_googleMaps(),],
+        ));
+  }
+
+  Widget _googleMaps() {
+    return GoogleMap(
+      mapType: MapType.hybrid,
+      initialCameraPosition: _con.initialPositon,
+      onMapCreated: _con.onMapCreated,
     );
   }
 
