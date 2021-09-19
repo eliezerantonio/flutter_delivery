@@ -28,7 +28,7 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Selecione a sua localizacao22"),
+          title: Text("Selecione a sua localizacao"),
         ),
         body: Stack(
           children: [_googleMaps(),],
@@ -37,7 +37,7 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
 
   Widget _googleMaps() {
     return GoogleMap(
-      mapType: MapType.hybrid,
+      mapType: MapType.normal,
       initialCameraPosition: _con.initialPositon,
       onMapCreated: _con.onMapCreated,
     );
