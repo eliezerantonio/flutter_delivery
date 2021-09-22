@@ -31,6 +31,7 @@ dependencies:
   google_maps_flutter: ^2.0.9
   http: ^0.13.3
   image_picker: ^0.8.4
+  location: ^4.1.1
   modal_bottom_sheet: ^2.0.0
   shared_preferences: ^2.0.6
   sn_progress_dialog: ^1.0.3
