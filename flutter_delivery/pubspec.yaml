@@ -27,6 +27,8 @@ dependencies:
   flutter_image_slideshow: ^0.1.1
   flutter_masked_text: ^0.8.0
   fluttertoast: ^8.0.8
+  geocoder: ^0.2.1
+  geocoding: ^2.0.1
   geolocator: ^7.6.2
   google_maps_flutter: ^2.0.9
   http: ^0.13.3

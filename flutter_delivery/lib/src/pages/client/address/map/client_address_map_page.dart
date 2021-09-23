@@ -54,12 +54,12 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
   Widget _cardAddress() {
     return Container(
       child: Card(
-        color: Colors.grey[400],
+        color: Colors.grey,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Text(
-            "Local actual",
+            "${_con.addressName ?? ''}",
             style: TextStyle(
               color: Colors.white,
               fontSize: 14,
@@ -81,6 +81,12 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
       initialCameraPosition: _con.initialPositon,
       onMapCreated: _con.onMapCreated,
       myLocationButtonEnabled: true,
+      onCameraMove: (position) {
+        _con.initialPositon = position;
+      },
+      onCameraIdle: () async {
+     await   _con.setLocationDraggableInfo();
+      },
     );
   }
 
