@@ -85,7 +85,7 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
         _con.initialPositon = position;
       },
       onCameraIdle: () async {
-     await   _con.setLocationDraggableInfo();
+        await _con.setLocationDraggableInfo();
       },
     );
   }
@@ -96,7 +96,7 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
       height: 50,
       margin: EdgeInsets.symmetric(horizontal: 67, vertical: 30),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: _con.selectRefPoint,
         child: Text("Confirmar local"),
         style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,

@@ -25,6 +25,15 @@ class ClientAddressMapController {
     checkGPS();
   }
 
+  void selectRefPoint() {
+    Map<String, dynamic> data = {
+      "address": addressName,
+      "lat": addressLatLng.latitude,
+      "lng": addressLatLng.longitude,
+    };
+    Navigator.pop(context, data);
+  }
+
   void goToNewAddress() {
     Navigator.pushNamed(context, 'client/address/create');
   }
@@ -101,7 +110,7 @@ class ClientAddressMapController {
       double lng = initialPositon.target.longitude;
 
       List<Placemark> address = await placemarkFromCoordinates(lat, lng);
-          print(address);
+      print(address);
 
       if (address != null) {
         if (address.length > 0) {
