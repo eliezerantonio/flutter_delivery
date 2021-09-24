@@ -30,7 +30,7 @@ class _ClientAddressCreatePageState extends State<ClientAddressCreatePage> {
         title: Text("Nova Endereco"),
       ),
       body: Container(
-        child: Column( 
+        child: Column(
           children: [
             _textCompleteData(),
             _textFieldAddess(),
@@ -68,6 +68,7 @@ class _ClientAddressCreatePageState extends State<ClientAddressCreatePage> {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: TextField(
+          controller: _con.addressController,
           decoration: InputDecoration(
             labelText: 'Endereco',
             suffixIcon: Icon(
@@ -82,6 +83,7 @@ class _ClientAddressCreatePageState extends State<ClientAddressCreatePage> {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: TextField(
+          controller: _con.neighborhoodController,
           decoration: InputDecoration(
             labelText: 'Bairro',
             suffixIcon: Icon(
@@ -96,7 +98,7 @@ class _ClientAddressCreatePageState extends State<ClientAddressCreatePage> {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: TextField(
-          controller:_con.refPointController,
+          controller: _con.refPointController,
           onTap: _con.openMap,
           autofocus: false,
           focusNode: AlwaysDisabledFocusNode(),
