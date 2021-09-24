@@ -41,7 +41,7 @@ class ClientAddressCreateController {
       return;
     }
     Address address = new Address(
-        address: addressName, neighborhood: neighborhood, lat: lat, lng: lng);
+        address: addressName, neighborhood: neighborhood, lat: lat, lng: lng, idUser: user.id);
 
     ResponseApi responseApi = await _addressProvider.create(address);
 

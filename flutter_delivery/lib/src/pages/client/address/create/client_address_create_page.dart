@@ -54,7 +54,7 @@ class _ClientAddressCreatePageState extends State<ClientAddressCreatePage> {
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       height: 44,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: _con.createAddress,
         style: ElevatedButton.styleFrom(
           shape: StadiumBorder(),
           primary: MyColors.primaryColor,
