@@ -41,13 +41,20 @@ class ClientAddressCreateController {
       return;
     }
     Address address = new Address(
-        address: addressName, neighborhood: neighborhood, lat: lat, lng: lng, idUser: user.id);
+        address: addressName,
+        neighborhood: neighborhood,
+        lat: lat,
+        lng: lng,
+        idUser: user.id);
 
     ResponseApi responseApi = await _addressProvider.create(address);
 
     if (responseApi.success) {
+      address.id = responseApi.data;
+      _sharedPrefs.save('address', address);
+
       Fluttertoast.showToast(msg: responseApi.message);
-      Navigator.pop(context);
+      Navigator.pop(context, true);
     }
   }
 

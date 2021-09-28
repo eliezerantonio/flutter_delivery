@@ -19,19 +19,36 @@ class ClientAddressListController {
     this.refresh = refresh;
     user = User.fromJson(await _sharedPref.read('user'));
     _addressProvider.init(context, user);
+
+    refresh();
   }
 
   void handleRadioValueChange(int value) {
     radioValue = value;
+    _sharedPref.save('address', address[value]);
+    refresh();
   }
 
   Future<List<Address>> getAddress() async {
     address = await _addressProvider.getByUser(user.id);
 
+    Address a = Address.fromJson(await _sharedPref.read('address') ?? {});
+
+    int index = address.indexWhere((ad) => ad.id == a.id);
+
+    if (index != -1) {
+      radioValue = index;
+    }
+    
     return address;
   }
 
-  void goToNewAddress() {
-    Navigator.pushNamed(context, 'client/address/create');
+  void goToNewAddress() async {
+    var result = await Navigator.pushNamed(context, 'client/address/create');
+    if (result != null) {
+      if (result) {
+        refresh();
+      }
+    }
   }
 }
