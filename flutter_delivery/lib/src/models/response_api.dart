@@ -35,4 +35,7 @@ class ResponseApi {
   }
   Map<String, dynamic> toJson() =>
       {"success": success, "message": message, "error": error, "data": data};
+
+
+      
 }
