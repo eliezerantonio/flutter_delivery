@@ -10,7 +10,7 @@ import 'package:flutter_delivery/src/models/user.dart';
 
 class OrdersProvider {
   String _url = Environment.API_DELIVERY;
-  String _api = '/api/orders/create';
+  String _api = '/api/orders';
   BuildContext context;
   User sessionUser;
 
@@ -23,7 +23,7 @@ class OrdersProvider {
     Uri url = Uri.http(_url, '${_api}/create');
     String bodyParams = json.encode(order);
 
-    Map<String, dynamic> headers = {
+     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Authorization': sessionUser.sessionToken
     };

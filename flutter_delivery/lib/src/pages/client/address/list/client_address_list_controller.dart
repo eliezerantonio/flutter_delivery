@@ -38,9 +38,10 @@ class ClientAddressListController {
 
   void createOrder() async {
     Address a = Address.fromJson(await _sharedPref.read('address') ?? {});
-   final selectedProducts =
-        Product.fromJson(await _sharedPref.read('order') ?? {}).toList;
+   List<Product> selectedProducts =
+        Product.fromJsonList(await _sharedPref.read('order') ?? {}).toList;
     print(selectedProducts);
+
     Order order = new Order(
       idClient: user.id,
       idAddress: a.id,

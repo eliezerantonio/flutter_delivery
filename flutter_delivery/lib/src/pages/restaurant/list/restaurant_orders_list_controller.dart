@@ -7,6 +7,8 @@ class RestaurantOrdersListController {
   SharedPref _sharedPrefs = new SharedPref();
   GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
 
+  List<String> categories = ["PAGO","DESPACHADO","TRANSPORTE", "ENTREGUE"];
+
   User user;
   Future init(BuildContext context, Function refresh) async {
     this.context = context;

@@ -27,6 +27,7 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
       drawer: _drawer(),
       key: _controller.key,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: _menuDrawer(),
       ),
       body: Center(
