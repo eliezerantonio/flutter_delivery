@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_delivery/src/pages/restaurant/list/restaurant_orders_list_controller.dart';
+import 'package:flutter_delivery/src/utils/my_colors.dart';
+import 'package:flutter_delivery/src/widgets/no_data_widget.dart';
 
 class RestaunrantOrdersListPage extends StatefulWidget {
   RestaunrantOrdersListPage({Key key}) : super(key: key);
@@ -23,15 +25,73 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: _drawer(),
-      key: _controller.key,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: _menuDrawer(),
-      ),
-      body: Center(
-        child: Text("Centro Restuarant"),
+    return DefaultTabController(
+      length: _controller.categories?.length,
+      child: Scaffold(
+        drawer: _drawer(),
+        key: _controller.key,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(170),
+          child: AppBar(
+            backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
+            flexibleSpace: Column(
+              children: [
+                SizedBox(
+                  height: 40,
+                ),
+                _menuDrawer(),
+                SizedBox(height: 20)
+              ],
+            ),
+            bottom: TabBar(
+              indicatorColor: MyColors.primaryColor,
+              labelColor: Colors.black,
+              unselectedLabelColor: Colors.grey[400],
+              isScrollable: true,
+              tabs:
+                  List<Widget>.generate(_controller.categories.length, (index) {
+                return Tab(
+                  child: Text(_controller.categories[index] ?? ''),
+                );
+              }),
+            ),
+          ),
+        ),
+        body: TabBarView(
+          children: _controller.categories.map((String category) {
+            return Container();
+            // return FutureBuilder(
+            //   future: _controller.getProducts(category.id),
+            //   builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+            //     if (snapshot.hasData) {
+            //       if (snapshot.data.length > 0) {
+            //         return GridView.builder(
+            //           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+            //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //             crossAxisCount: 2,
+            //             childAspectRatio: 0.8,
+            //           ),
+            //           itemCount: snapshot?.data?.length ?? 0,
+            //           itemBuilder: (_, index) {
+            //             Product product = snapshot?.data[index];
+            //             return _cardProduct(product);
+            //           },
+            //         );
+            //       } else {
+            //         return NoDataWidget(
+            //           text: "Não há produtos",
+            //         );
+            //       }
+            //     } else {
+            //       return NoDataWidget(
+            //         text: "Não há produtos",
+            //       );
+            //     }
+            //   },
+            // );
+          }).toList(),
+        ),
       ),
     );
   }
