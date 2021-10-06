@@ -31,7 +31,7 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
         drawer: _drawer(),
         key: _controller.key,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(170),
+          preferredSize: Size.fromHeight(100),
           child: AppBar(
             backgroundColor: Colors.white,
             automaticallyImplyLeading: false,
@@ -41,7 +41,6 @@ class _RestaunrantOrdersListPageState extends State<RestaunrantOrdersListPage> {
                   height: 40,
                 ),
                 _menuDrawer(),
-                SizedBox(height: 20)
               ],
             ),
             bottom: TabBar(
